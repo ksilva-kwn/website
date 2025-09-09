@@ -4,7 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // Altere para o nome do seu repositório no GitHub
-const repoName = "/vite_react_shadcn_ts/";
+const repoName = "/website/";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
