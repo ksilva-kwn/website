@@ -30,6 +30,7 @@ const Certifications = () => {
       description: "Certificação avançada em arquitetura de soluções de nuvem da Oracle, cobrindo design de arquitetura em nuvem complexos e otimização de custos.",
       logo: oracleCloudLogo,
       color: "bg-orange-500/10 text-orange-500 border-orange-500/20",
+      link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=4EA02DCF1CC47FA3B393963C02BD5B7D06D6424403858E05A925B5DB57DA7894",
     },
     {
       title: "Oracle Cloud Infrastructure 2025 Certified Foundations Associate",
@@ -39,15 +40,17 @@ const Certifications = () => {
       description: "Conhecimentos fundamentais em serviços cloud da Oracle.",
       logo: oracleCloudLogo,
       color: "bg-sky-500/10 text-sky-500 border-sky-500/20",
+      link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=560AB4D57AF389893841564B704A0EDA2BDF31ED3AC82E65468A79D5E929968D",
     },
     {
-      title: "Oracle Cloud Infrastructure 2024 Certified Foundations Associate",
+      title: "Oracle Cloud Infrastructure 2023 Certified Foundations Associate",
       issuer: "Oracle Cloud",
       date: "2024",
       level: "Foundation",
       description: "Conhecimentos fundamentais em serviços cloud da Oracle.",
       logo: oracleCloudLogo,
       color: "bg-sky-500/10 text-sky-500 border-sky-500/20",
+      link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=792EC926D0D49D60EBDCC15C7944097C535BB78965DB5779C3D5B1C05C90B9B5",
     },
     {
       title: "Microsoft Azure Fundamentals",
@@ -57,6 +60,7 @@ const Certifications = () => {
       description: "Conhecimentos fundamentais em serviços cloud da Microsoft Azure.",
       logo: microsoftLogo,
       color: "bg-sky-500/10 text-sky-500 border-sky-500/20",
+      link: "https://www.credly.com/earner/earned/share/ad151c3d-cc81-45ee-afc3-7b8eda77add9",
     },
   ];
 
