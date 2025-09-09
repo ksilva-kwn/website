@@ -21,16 +21,9 @@ const Contact = () => {
       description: "Segunda à Sexta, 9h-18h"
     },
     {
-      icon: MapPin,
-      title: "Localização",
-      info: "Passos, MG",
-      link: "#",
-      description: "Trabalho remoto e presencial"
-    },
-    {
       icon: Clock,
       title: "Horário",
-      info: "Seg - Sex: 9h às 18h",
+      info: "Seg - Sex: 8h às 18h",
       link: "#",
       description: "Timezone: GMT-3 (Brasília)"
     },
