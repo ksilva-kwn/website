@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <title>Redirecionando...</title>
     <script>
-      // Redireciona para a raiz do seu projeto
-      var pathSegments = location.pathname.split('/');
-      var repoName = pathSegments[1];
-      var newPath = '/' + repoName + '/';
-      window.location.replace(newPath);
+      sessionStorage.redirect = location.href;
     </script>
+    <meta http-equiv="refresh" content="0;URL=/">
+    <link rel="canonical" href="/">
   </head>
   <body>
+    A página não foi encontrada.
+    <a href="/">Clique aqui para ir para a página inicial.</a>
   </body>
 </html>

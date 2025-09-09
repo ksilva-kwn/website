@@ -81,34 +81,31 @@ const Contact = () => {
               <div className="space-y-4">
                 <Card className="bg-card/50 backdrop-blur-sm border-primary/10">
                   <CardHeader>
-                    <CardTitle className="text-xl flex items-center">
-                      <Mail className="h-5 w-5 text-primary mr-2" />
-                      Contatos
-                    </CardTitle>
+                    <CardTitle className="text-xl">Contatos</CardTitle>
                   </CardHeader>
-                </Card>
-                {contactInfo.map((item, index) => (
-                  <Card key={index} className="bg-card/50 backdrop-blur-sm border-primary/10 hover-lift group">
-                    <CardContent className="p-6">
-                      <div className="flex items-start">
-                        <div className="p-3 bg-primary/10 rounded-lg mr-4 group-hover:bg-primary/20 transition-colors">
-                          <item.icon className="h-6 w-6 text-primary" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">
-                            {item.title}
-                          </h3>
-                          <p className="text-foreground mb-1">
-                            {item.info}
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            {item.description}
-                          </p>
+                  <CardContent className="space-y-4">
+                    {contactInfo.map((item, index) => (
+                      <div key={index}>
+                        <div className="flex items-start">
+                          <div className="p-3 bg-primary/10 rounded-lg mr-4 group-hover:bg-primary/20 transition-colors">
+                            <item.icon className="h-6 w-6 text-primary" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">
+                              {item.title}
+                            </h3>
+                            <p className="text-foreground mb-1">
+                              {item.info}
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                              {item.description}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                    ))}
+                  </CardContent>
+                </Card>
               </div>
 
               {/* Social Links */}
