@@ -9,6 +9,7 @@ const Header = () => {
 
   const navigation = [
     { name: "Início", href: "/" },
+    { name: "Projetos", href: "/#projects" },
     { name: "Contato", href: "/contact" },
   ];
 
@@ -24,7 +25,7 @@ const Header = () => {
               <Code2 className="w-6 h-6 text-white" />
             </div>
             <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              Kawan Silva
+              DevPortfólio
             </span>
           </Link>
 
@@ -46,13 +47,15 @@ const Header = () => {
                 )}
               </Link>
             ))}
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all"
-            >
-              Baixar CV
-            </Button>
+            <a href="/CV-Kawan_Silva-EN.pdf" download="CV-Kawan_Silva-EN.pdf">
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all"
+              >
+                Baixar CV
+              </Button>
+            </a>
           </nav>
 
           {/* Mobile menu button */}
@@ -84,13 +87,18 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
-              <Button 
-                variant="outline" 
-                size="sm"
-                className="mx-4 mt-2 border-primary/20 hover:border-primary/50"
+              <a href="/CV-Kawan_Silva-EN.pdf" download="CV-Kawan_Silva-EN.pdf"
+                onClick={() => setIsMenuOpen(false)}
+                className="mx-4 mt-2"
               >
-                Baixar CV
-              </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  className="w-full border-primary/20 hover:border-primary/50"
+                >
+                  Baixar CV
+                </Button>
+              </a>
             </div>
           </nav>
         )}
