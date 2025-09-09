@@ -2,7 +2,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Code2 } from "lucide-react";
 import { useState } from "react";
-import { ThemeToggle } from "@/components/ThemeToggle"; // Importe o novo componente
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,6 +9,7 @@ const Header = () => {
 
   const navigation = [
     { name: "Início", href: "/" },
+    { name: "Projetos", href: "/#projects" },
     { name: "Contato", href: "/contact" },
   ];
 
@@ -47,7 +47,6 @@ const Header = () => {
                 )}
               </Link>
             ))}
-            <ThemeToggle /> {/* Adicione o seletor de tema aqui */}
             <a href="/CV-Kawan_Silva-EN.pdf" download="CV-Kawan_Silva-EN.pdf">
               <Button 
                 variant="outline" 
@@ -88,9 +87,6 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
-                <div className="mx-4 mt-2">
-                  <ThemeToggle /> {/* Adicione o seletor de tema aqui */}
-                </div>
               <a href="/CV-Kawan_Silva-EN.pdf" download="CV-Kawan_Silva-EN.pdf"
                 onClick={() => setIsMenuOpen(false)}
                 className="mx-4 mt-2"
