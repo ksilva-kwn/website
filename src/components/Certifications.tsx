@@ -11,6 +11,7 @@ import { Award, Calendar, ExternalLink } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
 import React from 'react';
+import { Button } from "@/components/ui/button";
 
 // Use import.meta.env.BASE_URL para referenciar as imagens na pasta 'public'
 const oracleCloudLogo = `${import.meta.env.BASE_URL}OCI.png`;
@@ -43,7 +44,7 @@ const Certifications = () => {
       link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=560AB4D57AF389893841564B704A0EDA2BDF31ED3AC82E65468A79D5E929968D",
     },
     {
-      title: "Oracle Cloud Infrastructure 2023 Certified Foundations Associate",
+      title: "Oracle Cloud Infrastructure 2024 Certified Foundations Associate",
       issuer: "Oracle Cloud",
       date: "2024",
       level: "Foundation",
@@ -128,9 +129,13 @@ const Certifications = () => {
                             <Calendar className="h-4 w-4 mr-1" />
                             {cert.date}
                           </div>
-                          <button className="p-2 rounded-lg hover:bg-primary/10 transition-colors group/btn">
-                            <ExternalLink className="h-4 w-4 text-muted-foreground group-hover/btn:text-primary transition-colors" />
-                          </button>
+                          {cert.link && (
+                            <Button variant="ghost" size="sm" asChild>
+                              <a href={cert.link} target="_blank" rel="noopener noreferrer">
+                                <ExternalLink className="h-4 w-4 text-muted-foreground group-hover/btn:text-primary transition-colors" />
+                              </a>
+                            </Button>
+                          )}
                         </div>
                       </CardContent>
                     </Card>
