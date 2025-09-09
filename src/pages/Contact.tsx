@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Clock } from "lucide-react";
+import { Mail, Phone, MapPin, Github, Linkedin, Clock } from "lucide-react";
 import Header from "@/components/Header";
 import InteractiveMap from "@/components/InteractiveMap";
+import React from "react";
 
 const Contact = () => {
   const contactInfo = [
@@ -73,10 +74,11 @@ const Contact = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
-            {/* Contact Information */}
-            <div className="space-y-8 col-span-1">
-              <div className="grid gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            {/* Left Column: Contact Info & Social Links */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8"> {/* Ajustado para 2 colunas em md e acima */}
+              {/* Contact Information */}
+              <div className="space-y-4">
                 {contactInfo.map((item, index) => (
                   <Card key={index} className="bg-card/50 backdrop-blur-sm border-primary/10 hover-lift group">
                     <CardContent className="p-6">
@@ -100,42 +102,42 @@ const Contact = () => {
                   </Card>
                 ))}
               </div>
+
+              {/* Social Links */}
+              <div className="space-y-4">
+                <Card className="bg-card/50 backdrop-blur-sm border-primary/10">
+                  <CardHeader>
+                    <CardTitle className="text-xl">Redes Sociais</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid gap-4">
+                      {socialLinks.map((social, index) => (
+                        <a
+                          key={index}
+                          href={social.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center p-4 rounded-lg border border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all hover-lift group"
+                        >
+                          <social.icon className="h-5 w-5 text-primary mr-4" />
+                          <div>
+                            <div className="font-medium group-hover:text-primary transition-colors">
+                              {social.name}
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              {social.username}
+                            </div>
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
 
-            {/* Social Links */}
-            <div className="space-y-8 col-span-1">
-              <Card className="bg-card/50 backdrop-blur-sm border-primary/10">
-                <CardHeader>
-                  <CardTitle className="text-xl">Redes Sociais</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid gap-4">
-                    {socialLinks.map((social, index) => (
-                      <a
-                        key={index}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center p-4 rounded-lg border border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all hover-lift group"
-                      >
-                        <social.icon className="h-5 w-5 text-primary mr-4" />
-                        <div>
-                          <div className="font-medium group-hover:text-primary transition-colors">
-                            {social.name}
-                          </div>
-                          <div className="text-sm text-muted-foreground">
-                            {social.username}
-                          </div>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Interactive Map */}
-            <div className="space-y-8 col-span-1 lg:col-span-3">
+            {/* Right Column: Interactive Map */}
+            <div className="space-y-8 lg:col-span-1"> {/* Mapa ocupa 1 coluna em lg */}
               <Card className="bg-card/50 backdrop-blur-sm border-primary/10 overflow-hidden">
                 <CardHeader>
                   <CardTitle className="text-xl flex items-center">
