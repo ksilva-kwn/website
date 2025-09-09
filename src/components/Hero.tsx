@@ -37,7 +37,7 @@ const Hero = () => {
           {/* Profile Photo */}
           <div className="mb-8 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
             <Avatar className="w-32 h-32 mx-auto border-4 border-primary/20 shadow-2xl hover-lift">
-              <AvatarImage src="/sua-foto.jpg" alt="Kawan Aureliano da Silva" />
+              <AvatarImage src="/src/assets/kawan.jpg" alt="Kawan Aureliano da Silva" />
               <AvatarFallback className="bg-gradient-primary text-white text-3xl font-bold">
                 KA
               </AvatarFallback>
@@ -91,7 +91,7 @@ const Hero = () => {
           {/* Social Links */}
           <div className="flex justify-center space-x-6 animate-fade-in-up" style={{ animationDelay: "0.8s" }}>
             <a 
-              href="https://github.com" 
+              href="https://github.com/ksilva-kwn" 
               target="_blank" 
               rel="noopener noreferrer"
               className="p-3 rounded-full border border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all hover-lift group"
@@ -99,7 +99,7 @@ const Hero = () => {
               <Github className="h-6 w-6 text-foreground/70 group-hover:text-primary transition-colors" />
             </a>
             <a 
-              href="https://linkedin.com" 
+              href="https://linkedin.com/in/kawansilva29" 
               target="_blank" 
               rel="noopener noreferrer"
               className="p-3 rounded-full border border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all hover-lift group"
@@ -107,7 +107,7 @@ const Hero = () => {
               <Linkedin className="h-6 w-6 text-foreground/70 group-hover:text-primary transition-colors" />
             </a>
             <a 
-              href="mailto:seu@email.com"
+              href="mailto:kwnsilva@hotmail.com"
               className="p-3 rounded-full border border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all hover-lift group"
             >
               <Mail className="h-6 w-6 text-foreground/70 group-hover:text-primary transition-colors" />
