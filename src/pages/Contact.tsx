@@ -1,67 +1,9 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Clock } from "lucide-react";
 import Header from "@/components/Header";
 import InteractiveMap from "@/components/InteractiveMap";
-import { useToast } from "@/hooks/use-toast";
-import React, { useRef, useState } from "react";
-import emailjs from '@emailjs/browser';
 
 const Contact = () => {
-  const { toast } = useToast();
-  const formRef = useRef<HTMLFormElement>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!formRef.current) {
-      toast({
-        title: "Erro no formulário",
-        description: "Não foi possível encontrar o formulário para envio.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    const serviceId = 'service_jpglx3a';
-    const templateId = 'template_s5mu31k';
-    const publicKey = 'a6iL1tqqbE4_lrZ09';
-
-    try {
-      if (!serviceId || !templateId || !publicKey) {
-        throw new Error("As chaves de API não estão configuradas corretamente.");
-      }
-
-      await emailjs.sendForm(serviceId, templateId, formRef.current, {
-        publicKey,
-      });
-      
-      toast({
-        title: "Mensagem enviada!",
-        description: "Obrigado pelo contato. Responderei em breve!",
-      });
-
-      if (formRef.current) {
-        formRef.current.reset(); // Limpa o formulário após o envio
-      }
-
-    } catch (error) {
-      console.error("Erro no envio do formulário:", error);
-      toast({
-        title: "Erro no envio",
-        description: "Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente mais tarde.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   const contactInfo = [
     {
       icon: Mail,
@@ -132,68 +74,32 @@ const Contact = () => {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Form */}
+            {/* Contact Information */}
             <div className="space-y-8">
-              <Card className="bg-card/50 backdrop-blur-sm border-primary/10 hover-lift">
-                <CardHeader>
-                  <CardTitle className="text-2xl flex items-center">
-                    <Send className="h-6 w-6 mr-3 text-primary" />
-                    Envie uma Mensagem
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <form 
-                    ref={formRef}
-                    onSubmit={handleSubmit} 
-                    className="space-y-6"
-                  >
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <Input
-                          name="user_name"
-                          placeholder="Seu Nome"
-                          required
-                          className="bg-background/50 border-primary/20 focus:border-primary/50"
-                        />
+              <div className="grid gap-4">
+                {contactInfo.map((item, index) => (
+                  <Card key={index} className="bg-card/50 backdrop-blur-sm border-primary/10 hover-lift group">
+                    <CardContent className="p-6">
+                      <div className="flex items-start">
+                        <div className="p-3 bg-primary/10 rounded-lg mr-4 group-hover:bg-primary/20 transition-colors">
+                          <item.icon className="h-6 w-6 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">
+                            {item.title}
+                          </h3>
+                          <p className="text-foreground mb-1">
+                            {item.info}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {item.description}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <Input
-                          name="user_email"
-                          type="email"
-                          placeholder="Seu Email"
-                          required
-                          className="bg-background/50 border-primary/20 focus:border-primary/50"
-                        />
-                      </div>
-                    </div>
-                    
-                    <Input
-                      name="subject"
-                      placeholder="Assunto"
-                      required
-                      className="bg-background/50 border-primary/20 focus:border-primary/50"
-                    />
-                    
-                    <Textarea
-                      name="message"
-                      placeholder="Sua mensagem..."
-                      rows={6}
-                      required
-                      className="bg-background/50 border-primary/20 focus:border-primary/50 resize-none"
-                    />
-                    
-                    <Button 
-                      type="submit" 
-                      size="lg"
-                      className="w-full bg-gradient-primary hover:opacity-90 text-white font-medium"
-                      disabled={isSubmitting}
-                    >
-                      <Send className="h-5 w-5 mr-2" />
-                      {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
 
               {/* Social Links */}
               <Card className="bg-card/50 backdrop-blur-sm border-primary/10">
@@ -226,35 +132,8 @@ const Contact = () => {
               </Card>
             </div>
 
-            {/* Contact Info & Map */}
+            {/* Interactive Map */}
             <div className="space-y-8">
-              {/* Contact Information */}
-              <div className="grid gap-4">
-                {contactInfo.map((item, index) => (
-                  <Card key={index} className="bg-card/50 backdrop-blur-sm border-primary/10 hover-lift group">
-                    <CardContent className="p-6">
-                      <div className="flex items-start">
-                        <div className="p-3 bg-primary/10 rounded-lg mr-4 group-hover:bg-primary/20 transition-colors">
-                          <item.icon className="h-6 w-6 text-primary" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">
-                            {item.title}
-                          </h3>
-                          <p className="text-foreground mb-1">
-                            {item.info}
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            {item.description}
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              {/* Interactive Map */}
               <Card className="bg-card/50 backdrop-blur-sm border-primary/10 overflow-hidden">
                 <CardHeader>
                   <CardTitle className="text-xl flex items-center">
