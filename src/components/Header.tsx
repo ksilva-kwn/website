@@ -7,7 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const { translations, setLanguage } = useLanguage();
+  const { translations, language, setLanguage } = useLanguage();
 
   const navigation = [
     { name: translations.header.home, href: "/" },
