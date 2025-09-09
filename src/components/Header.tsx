@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Cloud } from "lucide-react";
+import { Menu, X, Cloud } from "lucide-react"; // Importe o ícone de nuvem
 import { useState } from "react";
 
 const Header = () => {
@@ -18,10 +18,10 @@ const Header = () => {
     <header className="fixed top-0 w-full z-50 glass border-b border-white/10">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo - Alterado aqui */}
           <Link to="/" className="flex items-center space-x-2 group">
             <div className="p-2 bg-gradient-primary rounded-lg group-hover:animate-glow transition-all">
-              <Code2 className="w-6 h-6 text-white" />
+              <Cloud className="w-6 h-6 text-white" /> {/* O ícone agora é uma nuvem */}
             </div>
             <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
               Kawan Silva
