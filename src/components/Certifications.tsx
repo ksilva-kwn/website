@@ -19,7 +19,7 @@ const microsoftLogo = `${import.meta.env.BASE_URL}Microsoft.png`;
 
 const Certifications = () => {
   const plugin = useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true })
+    Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true })
   );
 
   const certifications = [
@@ -88,6 +88,9 @@ const Certifications = () => {
         {/* Carousel */}
         <div className="max-w-6xl mx-auto">
           <Carousel
+            opts={{
+              loop: true, // Adiciona a funcionalidade de loop infinito
+            }}
             plugins={[plugin.current]}
             className="w-full"
             onMouseEnter={plugin.current.stop}
@@ -101,9 +104,8 @@ const Certifications = () => {
                       <CardContent className="p-6 h-full flex flex-col">
                         {/* Header */}
                         <div className="flex items-start justify-between mb-4">
-                          {/* Substituído o emoji pela imagem da logo */}
-                          <div className="h-10 w-10 overflow-hidden flex items-center justify-center">
-                            <img src={cert.logo} alt={`${cert.issuer} logo`} className="h-full w-auto" />
+                          <div className="text-4xl mb-2 group-hover:animate-bounce">
+                            {cert.logo}
                           </div>
                           <Badge className={`${cert.color} border transition-all group-hover:scale-105`}>
                             {cert.level}
