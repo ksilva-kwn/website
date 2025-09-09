@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroBackground from "@/assets/hero-tech-bg.jpg";
@@ -31,6 +32,16 @@ const Hero = () => {
             <span className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-medium">
               👋 Olá, eu sou
             </span>
+          </div>
+
+          {/* Profile Photo */}
+          <div className="mb-8 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+            <Avatar className="w-32 h-32 mx-auto border-4 border-primary/20 shadow-2xl hover-lift">
+              <AvatarImage src="/sua-foto.jpg" alt="Kawan Aureliano da Silva" />
+              <AvatarFallback className="bg-gradient-primary text-white text-3xl font-bold">
+                KA
+              </AvatarFallback>
+            </Avatar>
           </div>
 
           {/* Name and Title */}
