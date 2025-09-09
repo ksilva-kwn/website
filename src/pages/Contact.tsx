@@ -3,29 +3,31 @@ import { Mail, Phone, Github, Linkedin, Clock, MapPin } from "lucide-react";
 import Header from "@/components/Header";
 import InteractiveMap from "@/components/InteractiveMap";
 import React from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Contact = () => {
+  const { translations } = useLanguage();
   const contactInfo = [
     {
       icon: Mail,
-      title: "Email",
-      info: "kwnsilva@hotmail.com",
-      link: "mailto:kwnsilva@hotmail.com",
-      description: "Respondo em até 24h"
+      title: translations.contact.email_title,
+      info: translations.contact.email_info,
+      link: `mailto:${translations.contact.email_info}`,
+      description: translations.contact.email_description
     },
     {
       icon: Phone,
-      title: "Telefone",
-      info: "+55 35 99749-6400",
-      link: "tel:+5535997496400",
-      description: "Segunda à Sexta, 9h-18h"
+      title: translations.contact.phone_title,
+      info: translations.contact.phone_info,
+      link: `tel:${translations.contact.phone_info.replace(/[\s-]/g, "")}`,
+      description: translations.contact.phone_description
     },
     {
       icon: Clock,
-      title: "Horário",
-      info: "Seg - Sex: 8h às 18h",
+      title: translations.contact.time_title,
+      info: translations.contact.time_info,
       link: "#",
-      description: "Timezone: GMT-3 (Brasília)"
+      description: translations.contact.time_description
     },
   ];
 
@@ -44,26 +46,25 @@ const Contact = () => {
     },
     {
       icon: Mail,
-      name: "Email",
-      url: "mailto:kwnsilva@hotmail.com",
-      username: "kwnsilva@hotmail.com"
+      name: translations.contact.email_title,
+      url: `mailto:${translations.contact.email_info}`,
+      username: translations.contact.email_info
     },
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           {/* Hero Section */}
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Vamos Trabalhar <span className="bg-gradient-primary bg-clip-text text-transparent">Juntos</span>
+              {translations.contact.title_part1} <span className="bg-gradient-primary bg-clip-text text-transparent">{translations.contact.title_part2}</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Interessado em uma parceria? Tem um projeto em mente? 
-              Entre em contato e vamos conversar sobre como posso ajudar.
+              {translations.contact.subtitle}
             </p>
           </div>
 
@@ -74,7 +75,7 @@ const Contact = () => {
               <div className="space-y-4">
                 <Card className="bg-card/50 backdrop-blur-sm border-primary/10">
                   <CardHeader>
-                    <CardTitle className="text-xl">Contatos</CardTitle>
+                    <CardTitle className="text-xl">{translations.contact.contact_info_title}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {contactInfo.map((item, index) => (
@@ -105,7 +106,7 @@ const Contact = () => {
               <div className="space-y-4">
                 <Card className="bg-card/50 backdrop-blur-sm border-primary/10">
                   <CardHeader>
-                    <CardTitle className="text-xl">Redes Sociais</CardTitle>
+                    <CardTitle className="text-xl">{translations.contact.social_links_title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="grid gap-4">
@@ -140,7 +141,7 @@ const Contact = () => {
                 <CardHeader>
                   <CardTitle className="text-xl flex items-center">
                     <MapPin className="h-6 w-6 mr-3 text-primary" />
-                    Localização
+                    {translations.contact.location_title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">

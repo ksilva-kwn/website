@@ -1,33 +1,35 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Building2, Calendar, MapPin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Experience = () => {
+  const { translations } = useLanguage();
   const experiences = [
     {
-      title: "Solutions Architect",
-      company: "Statum Tecnologia",
-      location: "Ribeirão Preto, SP (Remote)",
-      period: "Set 2025 - Current",
-      description: "In my current role as a Solutions Architect at Statum, I design and implement cloud solutions tailored to meet client needs. I collaborate closely with development and operations teams to ensure seamless integration and deployment of applications in cloud environments.",
+      title: translations.experience.job_title_1,
+      company: translations.experience.company_1,
+      location: translations.experience.location_1,
+      period: translations.experience.period_1,
+      description: translations.experience.description_1,
       technologies: ["Azure", "OCI", "Docker", "Kubernetes", "Terraform", "Monitoring", "Zabbix", "Bash", "PowerShell", "GLPI", "Linux", "Windows Server", "Shell Script"],
       current: true,
     },
     {
-      title: "Cloud Specialist",
-      company: "Statum Tecnologia",
-      location: "Ribeirão Preto, SP (Remote)",
-      period: "Out 2024 - Ago 2025",
-      description: "At Statum, I provide technical support and cloud infrastructure services for corporate environments, with a strong focus on Linux servers and cloud automation. I specialize in Oracle Cloud Infrastructure (OCI) and Microsoft Azure, managing virtual machines, storage solutions, and network configurations.",
+      title: translations.experience.job_title_2,
+      company: translations.experience.company_2,
+      location: translations.experience.location_2,
+      period: translations.experience.period_2,
+      description: translations.experience.description_2,
       technologies: ["Azure", "OCI", "Docker", "Terraform", "Monitoring", "Zabbix", "Bash", "PowerShell", "GLPI", "Linux", "Windows Server", "Shell Script"],
       current: false,
     },
     {
-      title: "Cloud Support Intern",
-      company: "Statum Tecnologia",
-      location: "Ribeirão Preto, SP (Remote)",
-      period: "Jan 2024 - Set 2024",
-      description: "During my internship, I provided technical support for cloud environments, with a focus on Oracle Cloud Infrastructure (OCI) and Microsoft Azure. My responsibilities included incident handling and follow-up, as well as proactive monitoring using Zabbix to ensure stability and operational efficiency.",
+      title: translations.experience.job_title_3,
+      company: translations.experience.company_3,
+      location: translations.experience.location_3,
+      period: translations.experience.period_3,
+      description: translations.experience.description_3,
       technologies: ["Linux", "Windows Server", "GLPI", "Zabbix", "Shell Script", "PowerShell"],
       current: false,
     },
@@ -39,10 +41,10 @@ const Experience = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Experiência <span className="bg-gradient-primary bg-clip-text text-transparent">Profissional</span>
+            {translations.experience.title_part1} <span className="bg-gradient-primary bg-clip-text text-transparent">{translations.experience.title_part2}</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Uma jornada através das tecnologias mais modernas e desafiadoras do mercado
+            {translations.experience.subtitle}
           </p>
         </div>
 
@@ -53,8 +55,8 @@ const Experience = () => {
             <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-primary transform md:-translate-x-1/2" />
 
             {experiences.map((exp, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`relative mb-12 ${
                   index % 2 === 0 ? 'md:ml-auto md:pl-8' : 'md:mr-auto md:pr-8'
                 } md:w-1/2 animate-fade-in-up`}
@@ -62,8 +64,8 @@ const Experience = () => {
               >
                 {/* Timeline Dot */}
                 <div className={`absolute top-6 w-4 h-4 bg-primary rounded-full border-4 border-background ${
-                  index % 2 === 0 
-                    ? 'left-0 md:-left-2' 
+                  index % 2 === 0
+                    ? 'left-0 md:-left-2'
                     : 'left-0 md:-right-2'
                 }`}>
                   {exp.current && (
@@ -81,16 +83,16 @@ const Experience = () => {
                         </h3>
                         {exp.current && (
                           <Badge className="bg-gradient-primary text-white border-0">
-                            Atual
+                            {translations.experience.current_badge}
                           </Badge>
                         )}
                       </div>
-                      
+
                       <div className="flex items-center text-primary font-medium">
                         <Building2 className="h-4 w-4 mr-2" />
                         {exp.company}
                       </div>
-                      
+
                       <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-muted-foreground">
                         <div className="flex items-center">
                           <Calendar className="h-4 w-4 mr-1" />
@@ -103,16 +105,16 @@ const Experience = () => {
                       </div>
                     </div>
                   </CardHeader>
-                  
+
                   <CardContent>
                     <p className="text-muted-foreground mb-4 leading-relaxed">
                       {exp.description}
                     </p>
-                    
+
                     <div className="flex flex-wrap gap-2">
                       {exp.technologies.map((tech, techIndex) => (
-                        <Badge 
-                          key={techIndex} 
+                        <Badge
+                          key={techIndex}
                           variant="secondary"
                           className="bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
                         >
