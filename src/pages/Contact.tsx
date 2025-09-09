@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Github, Linkedin, Clock } from "lucide-react";
+import { Mail, Phone, Github, Linkedin, Clock, MapPin } from "lucide-react";
 import Header from "@/components/Header";
 import InteractiveMap from "@/components/InteractiveMap";
 import React from "react";
@@ -19,6 +19,13 @@ const Contact = () => {
       info: "+55 35 99749-6400",
       link: "tel:+5535997496400",
       description: "Segunda à Sexta, 9h-18h"
+    },
+    {
+      icon: MapPin,
+      title: "Localização",
+      info: "Passos, MG",
+      link: "#",
+      description: "Trabalho remoto e presencial"
     },
     {
       icon: Clock,
@@ -67,8 +74,8 @@ const Contact = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Left Column: Contact Info & Social Links */}
+          <div className="flex flex-col gap-12 max-w-6xl mx-auto">
+            {/* Top Section: Contact Info & Social Links */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Contact Information */}
               <div className="space-y-4">
@@ -134,8 +141,8 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Right Column: Interactive Map */}
-            <div className="space-y-8 lg:col-span-1">
+            {/* Bottom Section: Interactive Map */}
+            <div className="space-y-8">
               <Card className="bg-card/50 backdrop-blur-sm border-primary/10 overflow-hidden">
                 <CardHeader>
                   <CardTitle className="text-xl flex items-center">
