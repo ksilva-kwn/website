@@ -22,39 +22,28 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Simula o envio do email para um endpoint de API
-    // Você precisa criar e configurar este endpoint no seu backend
-    try {
-      // Aqui você enviaria os dados do formulário para o seu backend
-      // const response = await fetch("/api/send-email", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(formData),
-      // });
-      //
-      // if (response.ok) {
-        toast({
-          title: "Mensagem enviada!",
-          description: "Obrigado pelo contato. Responderei em breve!",
-        });
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      // } else {
-      //   throw new Error("Falha ao enviar a mensagem.");
-      // }
-    } catch (error) {
-      console.error(error);
+  const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Verifica se os campos obrigatórios estão preenchidos
+    if (!formData.name || !formData.email || !formData.message) {
+      e.preventDefault();
       toast({
-        title: "Erro no envio",
-        description: "Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente mais tarde.",
+        title: "Erro",
+        description: "Por favor, preencha o Nome, Email e a Mensagem.",
         variant: "destructive",
       });
+      return;
     }
   };
+
+  // Monta a mensagem para o WhatsApp
+  const whatsappMessage = `Olá, Kawan! Meu nome é ${formData.name} e meu e-mail é ${formData.email}. O assunto é: ${formData.subject}. Mensagem: ${formData.message}`;
+
+  // Codifica a mensagem para ser usada na URL
+  const encodedMessage = encodeURIComponent(whatsappMessage);
+
+  const phoneNumber = "5535997496400"; // Substitua pelo seu número
+
+  const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
   const contactInfo = [
     {
@@ -136,7 +125,7 @@ const Contact = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <Input
@@ -164,7 +153,6 @@ const Contact = () => {
                     <Input
                       name="subject"
                       placeholder="Assunto"
-                      required
                       value={formData.subject}
                       onChange={handleInputChange}
                       className="bg-background/50 border-primary/20 focus:border-primary/50"
@@ -181,12 +169,20 @@ const Contact = () => {
                     />
                     
                     <Button 
-                      type="submit" 
+                      type="button" // Alterado para type="button"
                       size="lg"
                       className="w-full bg-gradient-primary hover:opacity-90 text-white font-medium"
+                      asChild
                     >
-                      <Send className="h-5 w-5 mr-2" />
-                      Enviar Mensagem
+                      <a 
+                        href={whatsappLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        onClick={handleWhatsAppClick}
+                      >
+                        <Send className="h-5 w-5 mr-2" />
+                        Enviar Mensagem (WhatsApp)
+                      </a>
                     </Button>
                   </form>
                 </CardContent>
