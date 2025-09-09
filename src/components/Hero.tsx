@@ -37,7 +37,7 @@ const Hero = () => {
           {/* Profile Photo */}
           <div className="mb-8 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
             <Avatar className="w-32 h-32 mx-auto border-4 border-primary/20 shadow-2xl hover-lift">
-              <AvatarImage src="/src/assets/kawan.jpg" alt="Kawan Aureliano da Silva" />
+              <AvatarImage src="/kawan.jpg" alt="Kawan Aureliano da Silva" />
               <AvatarFallback className="bg-gradient-primary text-white text-3xl font-bold">
                 KA
               </AvatarFallback>
