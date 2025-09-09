@@ -73,9 +73,9 @@ const Contact = () => {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
             {/* Contact Information */}
-            <div className="space-y-8">
+            <div className="space-y-8 col-span-1">
               <div className="grid gap-4">
                 {contactInfo.map((item, index) => (
                   <Card key={index} className="bg-card/50 backdrop-blur-sm border-primary/10 hover-lift group">
@@ -100,8 +100,10 @@ const Contact = () => {
                   </Card>
                 ))}
               </div>
+            </div>
 
-              {/* Social Links */}
+            {/* Social Links */}
+            <div className="space-y-8 col-span-1">
               <Card className="bg-card/50 backdrop-blur-sm border-primary/10">
                 <CardHeader>
                   <CardTitle className="text-xl">Redes Sociais</CardTitle>
@@ -133,7 +135,7 @@ const Contact = () => {
             </div>
 
             {/* Interactive Map */}
-            <div className="space-y-8">
+            <div className="space-y-8 col-span-1 lg:col-span-3">
               <Card className="bg-card/50 backdrop-blur-sm border-primary/10 overflow-hidden">
                 <CardHeader>
                   <CardTitle className="text-xl flex items-center">
