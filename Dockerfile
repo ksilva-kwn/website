@@ -6,6 +6,6 @@ WORKDIR /app
 
 RUN npm install
 
-EXPOSE 3000
+EXPOSE 8080
 
-CMD ["npm", "start", "--port", "3000"]
+CMD ["npm", "start"]

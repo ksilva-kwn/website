@@ -24,7 +24,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-dark opacity-80" />
       <div className="absolute top-20 left-10 w-72 h-72 bg-tech-blue/20 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-tech-purple/20 rounded-full blur-3xl animate-float" style={{ animationDelay: "1s" }} />
-      
+      <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-tech-cyan/20 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s", transform: 'translate(-50%, -50%)' }} />
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
           {/* Greeting */}
@@ -39,7 +39,7 @@ const Hero = () => {
             <Avatar className="w-32 h-32 mx-auto border-4 border-primary/20 shadow-2xl hover-lift">
               <AvatarImage src="/kawan.jpg" alt="Kawan Aureliano da Silva" />
               <AvatarFallback className="bg-gradient-primary text-white text-3xl font-bold">
-                KA
+                KS
               </AvatarFallback>
             </Avatar>
           </div>
@@ -52,7 +52,7 @@ const Hero = () => {
               </span>
             </h1>
             <h2 className="text-2xl md:text-3xl lg:text-4xl text-foreground/80 font-light">
-              DevOps Engineer & Cloud Specialist
+              Solutions Architect | DevOps Enthusiast
             </h2>
           </div>
 

@@ -10,6 +10,12 @@ import { Badge } from "@/components/ui/badge";
 import { Award, Calendar, ExternalLink } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
+import React from 'react';
+
+// Importe as logos das empresas aqui
+// Certifique-se de que os arquivos de imagem estão na pasta 'public'
+const oracleCloudLogo = "/OCI.png";
+const microsoftLogo = "/Microsoft.png";
 
 const Certifications = () => {
   const plugin = useRef(
@@ -18,57 +24,39 @@ const Certifications = () => {
 
   const certifications = [
     {
-      title: "AWS Certified Solutions Architect - Professional",
-      issuer: "Amazon Web Services",
-      date: "2023",
-      level: "Professional",
-      description: "Certificação avançada em arquitetura de soluções AWS, cobrindo design de sistemas complexos e otimização de custos.",
-      logo: "🏗️",
+      title: "Oracle Cloud Infrastructure 2025 Certified Architect Associate",
+      issuer: "Oracle Cloud",
+      date: "2025",
+      level: "Associate",
+      description: "Certificação avançada em arquitetura de soluções de nuvem da Oracle, cobrindo design de arquitetura em nuvem complexos e otimização de custos.",
+      logo: oracleCloudLogo,
       color: "bg-orange-500/10 text-orange-500 border-orange-500/20",
     },
     {
-      title: "Certified Kubernetes Administrator (CKA)",
-      issuer: "Cloud Native Computing Foundation",
-      date: "2023",
-      level: "Professional",
-      description: "Certificação oficial em administração de clusters Kubernetes, incluindo troubleshooting e manutenção.",
-      logo: "⚙️",
-      color: "bg-blue-500/10 text-blue-500 border-blue-500/20",
+      title: "Oracle Cloud Infrastructure 2025 Certified Foundations Associate",
+      issuer: "Oracle Cloud",
+      date: "2025",
+      level: "Foundation",
+      description: "Conhecimentos fundamentais em serviços cloud da Oracle.",
+      logo: oracleCloudLogo,
+      color: "bg-sky-500/10 text-sky-500 border-sky-500/20",
     },
     {
-      title: "HashiCorp Terraform Associate",
-      issuer: "HashiCorp",
-      date: "2022",
-      level: "Associate",
-      description: "Competência em Infrastructure as Code usando Terraform para provisionamento de recursos cloud.",
-      logo: "🔧",
-      color: "bg-purple-500/10 text-purple-500 border-purple-500/20",
-    },
-    {
-      title: "AWS Certified DevOps Engineer - Professional",
-      issuer: "Amazon Web Services",
-      date: "2022",
-      level: "Professional",
-      description: "Expertise em práticas DevOps na AWS, incluindo CI/CD, monitoramento e automação.",
-      logo: "⚡",
-      color: "bg-green-500/10 text-green-500 border-green-500/20",
-    },
-    {
-      title: "Docker Certified Associate",
-      issuer: "Docker Inc.",
-      date: "2021",
-      level: "Associate",
-      description: "Certificação em containerização e orquestração usando Docker e Docker Swarm.",
-      logo: "🐳",
-      color: "bg-cyan-500/10 text-cyan-500 border-cyan-500/20",
+      title: "Oracle Cloud Infrastructure 2024 Certified Foundations Associate",
+      issuer: "Oracle Cloud",
+      date: "2024",
+      level: "Foundation",
+      description: "Conhecimentos fundamentais em serviços cloud da Oracle.",
+      logo: oracleCloudLogo,
+      color: "bg-sky-500/10 text-sky-500 border-sky-500/20",
     },
     {
       title: "Microsoft Azure Fundamentals",
       issuer: "Microsoft",
-      date: "2021",
+      date: "2022",
       level: "Fundamental",
       description: "Conhecimentos fundamentais em serviços cloud da Microsoft Azure.",
-      logo: "☁️",
+      logo: microsoftLogo,
       color: "bg-sky-500/10 text-sky-500 border-sky-500/20",
     },
   ];
@@ -109,8 +97,9 @@ const Certifications = () => {
                       <CardContent className="p-6 h-full flex flex-col">
                         {/* Header */}
                         <div className="flex items-start justify-between mb-4">
-                          <div className="text-4xl mb-2 group-hover:animate-bounce">
-                            {cert.logo}
+                          {/* Substituído o emoji pela imagem da logo */}
+                          <div className="h-10 w-10 overflow-hidden flex items-center justify-center">
+                            <img src={cert.logo} alt={`${cert.issuer} logo`} className="h-full w-auto" />
                           </div>
                           <Badge className={`${cert.color} border transition-all group-hover:scale-105`}>
                             {cert.level}
@@ -157,9 +146,7 @@ const Certifications = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto">
           {[
             { label: "Certificações", value: certifications.length.toString() },
-            { label: "Fornecedores", value: "5" },
-            { label: "Níveis Professional", value: "3" },
-            { label: "Anos de Experiência", value: "5+" },
+            { label: "Anos de Experiência", value: "2+" },
           ].map((stat, index) => (
             <div 
               key={index} 

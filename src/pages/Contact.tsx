@@ -6,37 +6,75 @@ import { Mail, Phone, MapPin, Send, Github, Linkedin, Clock } from "lucide-react
 import Header from "@/components/Header";
 import InteractiveMap from "@/components/InteractiveMap";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 const Contact = () => {
   const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Mensagem enviada!",
-      description: "Obrigado pelo contato. Responderei em breve!",
-    });
+    
+    // Simula o envio do email para um endpoint de API
+    // Você precisa criar e configurar este endpoint no seu backend
+    try {
+      // Aqui você enviaria os dados do formulário para o seu backend
+      // const response = await fetch("/api/send-email", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(formData),
+      // });
+      //
+      // if (response.ok) {
+        toast({
+          title: "Mensagem enviada!",
+          description: "Obrigado pelo contato. Responderei em breve!",
+        });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      // } else {
+      //   throw new Error("Falha ao enviar a mensagem.");
+      // }
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Erro no envio",
+        description: "Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente mais tarde.",
+        variant: "destructive",
+      });
+    }
   };
 
   const contactInfo = [
     {
       icon: Mail,
       title: "Email",
-      info: "seu@email.com",
-      link: "mailto:seu@email.com",
+      info: "kwnsilva@hotmail.com",
+      link: "mailto:kwnsilva@hotmail.com",
       description: "Respondo em até 24h"
     },
     {
       icon: Phone,
       title: "Telefone",
-      info: "+55 11 99999-9999",
-      link: "tel:+5511999999999",
+      info: "+55 35 99749-6400",
+      link: "tel:+5535997496400",
       description: "Segunda à Sexta, 9h-18h"
     },
     {
       icon: MapPin,
       title: "Localização",
-      info: "São Paulo, SP",
+      info: "Passos, MG",
       link: "#",
       description: "Trabalho remoto e presencial"
     },
@@ -53,20 +91,20 @@ const Contact = () => {
     {
       icon: Github,
       name: "GitHub",
-      url: "https://github.com",
-      username: "@seuusuario"
+      url: "https://github.com/ksilva-kwn",
+      username: "@ksilva-kwn"
     },
     {
       icon: Linkedin,
       name: "LinkedIn",
-      url: "https://linkedin.com",
-      username: "/in/seuperfil"
+      url: "https://linkedin.com/in/kawansilva29",
+      username: "/in/kawansilva29"
     },
     {
       icon: Mail,
       name: "Email",
-      url: "mailto:seu@email.com",
-      username: "seu@email.com"
+      url: "mailto:kwnsilva@hotmail.com",
+      username: "kwnsilva@hotmail.com"
     },
   ];
 
@@ -102,31 +140,43 @@ const Contact = () => {
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <Input
+                          name="name"
                           placeholder="Seu Nome"
                           required
+                          value={formData.name}
+                          onChange={handleInputChange}
                           className="bg-background/50 border-primary/20 focus:border-primary/50"
                         />
                       </div>
                       <div>
                         <Input
+                          name="email"
                           type="email"
                           placeholder="Seu Email"
                           required
+                          value={formData.email}
+                          onChange={handleInputChange}
                           className="bg-background/50 border-primary/20 focus:border-primary/50"
                         />
                       </div>
                     </div>
                     
                     <Input
+                      name="subject"
                       placeholder="Assunto"
                       required
+                      value={formData.subject}
+                      onChange={handleInputChange}
                       className="bg-background/50 border-primary/20 focus:border-primary/50"
                     />
                     
                     <Textarea
+                      name="message"
                       placeholder="Sua mensagem..."
                       rows={6}
                       required
+                      value={formData.message}
+                      onChange={handleInputChange}
                       className="bg-background/50 border-primary/20 focus:border-primary/50 resize-none"
                     />
                     
