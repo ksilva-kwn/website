@@ -37,7 +37,7 @@ const Hero = () => {
           <div className="mb-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
               <span className="bg-gradient-primary bg-clip-text text-transparent">
-                Seu Nome
+                Kawan Aureliano da Silva
               </span>
             </h1>
             <h2 className="text-2xl md:text-3xl lg:text-4xl text-foreground/80 font-light">
