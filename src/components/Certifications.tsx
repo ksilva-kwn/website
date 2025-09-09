@@ -12,10 +12,9 @@ import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
 import React from 'react';
 
-// Importe as logos das empresas aqui
-// Certifique-se de que os arquivos de imagem estão na pasta 'public'
-const oracleCloudLogo = "/OCI.png";
-const microsoftLogo = "/Microsoft.png";
+// Use import.meta.env.BASE_URL para referenciar as imagens na pasta 'public'
+const oracleCloudLogo = `${import.meta.env.BASE_URL}OCI.png`;
+const microsoftLogo = `${import.meta.env.BASE_URL}Microsoft.png`;
 
 const Certifications = () => {
   const plugin = useRef(
