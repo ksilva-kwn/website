@@ -12,55 +12,53 @@ import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 // Caminhos corrigidos para as imagens na pasta 'public'
 const oracleCloudLogo = "/OCI.png";
 const microsoftLogo = "/Microsoft.png";
 
 const Certifications = () => {
-  const { translations } = useLanguage();
   const plugin = useRef(
     Autoplay({ delay: 3000, stopOnInteraction: true })
   );
 
   const certifications = [
     {
-      title: translations.certifications.cert_1_title,
-      issuer: translations.certifications.cert_1_issuer,
-      date: translations.certifications.cert_1_date,
-      level: translations.certifications.cert_1_level,
-      description: translations.certifications.cert_1_description,
+      title: "Oracle Cloud Infrastructure 2025 Certified Architect Associate",
+      issuer: "Oracle Cloud",
+      date: "2025",
+      level: "Associate",
+      description: "Certificação avançada em arquitetura de soluções de nuvem da Oracle, cobrindo design de arquitetura em nuvem complexos e otimização de custos.",
       logo: oracleCloudLogo,
       color: "bg-orange-500/10 text-orange-500 border-orange-500/20",
       link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=4EA02DCF1CC47FA3B393963C02BD5B7D06D6424403858E05A925B5DB57DA7894",
     },
     {
-      title: translations.certifications.cert_2_title,
-      issuer: translations.certifications.cert_2_issuer,
-      date: translations.certifications.cert_2_date,
-      level: translations.certifications.cert_2_level,
-      description: translations.certifications.cert_2_description,
+      title: "Oracle Cloud Infrastructure 2025 Certified Foundations Associate",
+      issuer: "Oracle Cloud",
+      date: "2025",
+      level: "Foundation",
+      description: "Conhecimentos fundamentais em serviços cloud da Oracle.",
       logo: oracleCloudLogo,
       color: "bg-sky-500/10 text-sky-500 border-sky-500/20",
       link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=560AB4D57AF389893841564B704A0EDA2BDF31ED3AC82E65468A79D5E929968D",
     },
     {
-      title: translations.certifications.cert_3_title,
-      issuer: translations.certifications.cert_3_issuer,
-      date: translations.certifications.cert_3_date,
-      level: translations.certifications.cert_3_level,
-      description: translations.certifications.cert_3_description,
+      title: "Oracle Cloud Infrastructure 2024 Certified Foundations Associate",
+      issuer: "Oracle Cloud",
+      date: "2024",
+      level: "Foundation",
+      description: "Conhecimentos fundamentais em serviços cloud da Oracle.",
       logo: oracleCloudLogo,
       color: "bg-sky-500/10 text-sky-500 border-sky-500/20",
       link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=792EC926D0D49D60EBDCC15C7944097C535BB78965DB5779C3D5B1C05C90B9B5",
     },
     {
-      title: translations.certifications.cert_4_title,
-      issuer: translations.certifications.cert_4_issuer,
-      date: translations.certifications.cert_4_date,
-      level: translations.certifications.cert_4_level,
-      description: translations.certifications.cert_4_description,
+      title: "Microsoft Azure Fundamentals",
+      issuer: "Microsoft",
+      date: "2022",
+      level: "Fundamental",
+      description: "Conhecimentos fundamentais em serviços cloud da Microsoft Azure.",
       logo: microsoftLogo,
       color: "bg-sky-500/10 text-sky-500 border-sky-500/20",
       link: "https://www.credly.com/earner/earned/share/ad151c3d-cc81-45ee-afc3-7b8eda77add9",
@@ -72,18 +70,18 @@ const Certifications = () => {
       {/* Background Effects */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-tech-purple/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-tech-cyan/10 rounded-full blur-3xl" />
-
+      
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center mb-4">
             <Award className="h-8 w-8 text-primary mr-3" />
             <h2 className="text-3xl md:text-4xl font-bold">
-              <span className="bg-gradient-primary bg-clip-text text-transparent">{translations.certifications.title}</span>
+              <span className="bg-gradient-primary bg-clip-text text-transparent">Certificações</span>
             </h2>
           </div>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {translations.certifications.subtitle}
+            Validando conhecimentos através das principais certificações da indústria
           </p>
         </div>
 
@@ -154,11 +152,11 @@ const Certifications = () => {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto">
           {[
-            { label: translations.certifications.stat_certifications, value: certifications.length.toString() },
-            { label: translations.certifications.stat_years_experience, value: "2+" },
+            { label: "Certificações", value: certifications.length.toString() },
+            { label: "Anos de Experiência", value: "2+" },
           ].map((stat, index) => (
-            <div
-              key={index}
+            <div 
+              key={index} 
               className="text-center p-6 rounded-lg glass hover-lift animate-fade-in-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >

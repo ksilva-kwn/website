@@ -1,17 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Cloud } from "lucide-react";
+import { Menu, X, Cloud } from "lucide-react"; // Importe o ícone de nuvem
 import { useState } from "react";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const { translations, language, setLanguage } = useLanguage();
 
   const navigation = [
-    { name: translations.header.home, href: "/" },
-    { name: translations.header.contact, href: "/contact" },
+    { name: "Início", href: "/" },
+    { name: "Contato", href: "/contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -23,10 +21,10 @@ const Header = () => {
           {/* Logo - Alterado aqui */}
           <Link to="/" className="flex items-center space-x-2 group">
             <div className="p-2 bg-gradient-primary rounded-lg group-hover:animate-glow transition-all">
-              <Cloud className="w-6 h-6 text-white" />
+              <Cloud className="w-6 h-6 text-white" /> {/* O ícone agora é uma nuvem */}
             </div>
             <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              {translations.header.kawan_silva}
+              Kawan Silva
             </span>
           </Link>
 
@@ -49,43 +47,25 @@ const Header = () => {
               </Link>
             ))}
             <a href="/CV-Kawan_Silva-EN.pdf" download="CV-Kawan_Silva-EN.pdf">
-              <Button
-                variant="outline"
+              <Button 
+                variant="outline" 
                 size="sm"
                 className="border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all"
               >
-                {translations.header.download_cv}
+                Baixar CV
               </Button>
             </a>
-            <div className="flex space-x-2">
-              <button onClick={() => setLanguage("pt-br")} className="p-1 rounded-md hover:bg-primary/10 transition-colors">
-                <span className="text-2xl">🇧🇷</span>
-              </button>
-              <button onClick={() => setLanguage("en-us")} className="p-1 rounded-md hover:bg-primary/10 transition-colors">
-                <span className="text-2xl">🇺🇸</span>
-              </button>
-            </div>
           </nav>
 
           {/* Mobile menu button */}
-          <div className="flex items-center md:hidden">
-            <div className="flex space-x-2 mr-4">
-              <button onClick={() => setLanguage("pt-br")} className="p-1 rounded-md hover:bg-primary/10 transition-colors">
-                <span className="text-2xl">🇧🇷</span>
-              </button>
-              <button onClick={() => setLanguage("en-us")} className="p-1 rounded-md hover:bg-primary/10 transition-colors">
-                <span className="text-2xl">🇺🇸</span>
-              </button>
-            </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="md:hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </Button>
         </div>
 
         {/* Mobile Navigation */}
@@ -110,12 +90,12 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
                 className="mx-4 mt-2"
               >
-                <Button
-                  variant="outline"
+                <Button 
+                  variant="outline" 
                   size="sm"
                   className="w-full border-primary/20 hover:border-primary/50"
                 >
-                  {translations.header.download_cv}
+                  Baixar CV
                 </Button>
               </a>
             </div>

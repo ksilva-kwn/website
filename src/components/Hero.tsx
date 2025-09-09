@@ -1,20 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ArrowDown, Github, Linkedin, Mail, ArrowUp } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, ArrowUp } from "lucide-react"; // Adicionado ArrowUp
 import { Link } from "react-router-dom";
 import heroBackground from "@/assets/hero-tech-bg.jpg";
-import { useState, useEffect } from "react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useState, useEffect } from "react"; // Adicionado useState e useEffect
 
 const Hero = () => {
-  const { translations } = useLanguage();
   const [showScrollButton, setShowScrollButton] = useState(false);
 
   const scrollToExperience = () => {
     const element = document.getElementById("experience");
     element?.scrollIntoView({ behavior: "smooth" });
   };
-
+  
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -37,7 +35,7 @@ const Hero = () => {
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background Effects */}
-      <div
+      <div 
         className="absolute inset-0 opacity-10"
         style={{
           backgroundImage: `url(${heroBackground})`,
@@ -54,7 +52,7 @@ const Hero = () => {
           {/* Greeting */}
           <div className="mb-6 animate-fade-in-up">
             <span className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-medium">
-              {translations.hero.greeting} 👋
+              👋 Olá, eu sou
             </span>
           </div>
 
@@ -76,36 +74,37 @@ const Hero = () => {
               </span>
             </h1>
             <h2 className="text-2xl md:text-3xl lg:text-4xl text-foreground/80 font-light">
-              {translations.hero.job_title}
+              Solutions Architect | DevOps Enthusiast
             </h2>
           </div>
 
           {/* Description */}
           <div className="mb-10 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              {translations.hero.description}
+              Especialista em Cloud Computing, Kubernetes e automação de infraestrutura. 
+              Transformando ideias em soluções escaláveis e eficientes.
             </p>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
-            <Button
-              size="lg"
+            <Button 
+              size="lg" 
               className="bg-gradient-primary hover:opacity-90 text-white font-medium px-8 py-4 text-lg hover-lift"
               onClick={scrollToExperience}
             >
-              {translations.hero.view_experience}
+              Ver Experiência
               <ArrowDown className="ml-2 h-5 w-5" />
             </Button>
-
-            <Button
-              variant="outline"
+            
+            <Button 
+              variant="outline" 
               size="lg"
               asChild
               className="border-primary/30 hover:border-primary/50 hover:bg-primary/10 px-8 py-4 text-lg hover-lift"
             >
               <Link to="/contact">
-                {translations.hero.get_in_touch}
+                Entre em Contato
                 <Mail className="ml-2 h-5 w-5" />
               </Link>
             </Button>
@@ -113,23 +112,23 @@ const Hero = () => {
 
           {/* Social Links */}
           <div className="flex justify-center space-x-6 animate-fade-in-up" style={{ animationDelay: "0.8s" }}>
-            <a
-              href="https://github.com/ksilva-kwn"
-              target="_blank"
+            <a 
+              href="https://github.com/ksilva-kwn" 
+              target="_blank" 
               rel="noopener noreferrer"
               className="p-3 rounded-full border border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all hover-lift group"
             >
               <Github className="h-6 w-6 text-foreground/70 group-hover:text-primary transition-colors" />
             </a>
-            <a
-              href="https://linkedin.com/in/kawansilva29"
-              target="_blank"
+            <a 
+              href="https://linkedin.com/in/kawansilva29" 
+              target="_blank" 
               rel="noopener noreferrer"
               className="p-3 rounded-full border border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all hover-lift group"
             >
               <Linkedin className="h-6 w-6 text-foreground/70 group-hover:text-primary transition-colors" />
             </a>
-            <a
+            <a 
               href="mailto:kwnsilva@hotmail.com"
               className="p-3 rounded-full border border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all hover-lift group"
             >
@@ -138,7 +137,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-
+      
       {/* Scroll to Top Button */}
       {showScrollButton && (
         <Button
