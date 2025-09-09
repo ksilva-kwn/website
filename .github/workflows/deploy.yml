@@ -39,7 +39,8 @@ jobs:
         with:
           node-version: 20
       - name: Install dependencies
-        run: npm ci
+        # Alterado de 'npm ci' para 'npm install'
+        run: npm install
       - name: Build with Vite
         run: npm run build
       - name: Upload artifact
