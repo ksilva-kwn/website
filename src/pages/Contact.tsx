@@ -76,9 +76,17 @@ const Contact = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Left Column: Contact Info & Social Links */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8"> {/* Ajustado para 2 colunas em md e acima */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Contact Information */}
               <div className="space-y-4">
+                <Card className="bg-card/50 backdrop-blur-sm border-primary/10">
+                  <CardHeader>
+                    <CardTitle className="text-xl flex items-center">
+                      <Mail className="h-5 w-5 text-primary mr-2" />
+                      Contatos
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
                 {contactInfo.map((item, index) => (
                   <Card key={index} className="bg-card/50 backdrop-blur-sm border-primary/10 hover-lift group">
                     <CardContent className="p-6">
@@ -137,7 +145,7 @@ const Contact = () => {
             </div>
 
             {/* Right Column: Interactive Map */}
-            <div className="space-y-8 lg:col-span-1"> {/* Mapa ocupa 1 coluna em lg */}
+            <div className="space-y-8 lg:col-span-1">
               <Card className="bg-card/50 backdrop-blur-sm border-primary/10 overflow-hidden">
                 <CardHeader>
                   <CardTitle className="text-xl flex items-center">
