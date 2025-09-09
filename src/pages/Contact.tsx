@@ -6,44 +6,61 @@ import { Mail, Phone, MapPin, Send, Github, Linkedin, Clock } from "lucide-react
 import Header from "@/components/Header";
 import InteractiveMap from "@/components/InteractiveMap";
 import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Verifica se os campos obrigatórios estão preenchidos
-    if (!formData.name || !formData.email || !formData.message) {
-      e.preventDefault();
+    if (!formRef.current) {
       toast({
-        title: "Erro",
-        description: "Por favor, preencha o Nome, Email e a Mensagem.",
+        title: "Erro no formulário",
+        description: "Não foi possível encontrar o formulário para envio.",
         variant: "destructive",
       });
       return;
     }
+
+    setIsSubmitting(true);
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    try {
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error("As chaves de API não estão configuradas corretamente.");
+      }
+
+      await emailjs.sendForm(serviceId, templateId, formRef.current, {
+        publicKey,
+      });
+      
+      toast({
+        title: "Mensagem enviada!",
+        description: "Obrigado pelo contato. Responderei em breve!",
+      });
+
+      if (formRef.current) {
+        formRef.current.reset(); // Limpa o formulário após o envio
+      }
+
+    } catch (error) {
+      console.error("Erro no envio do formulário:", error);
+      toast({
+        title: "Erro no envio",
+        description: "Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente mais tarde.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
-
-  // Monta a mensagem para o WhatsApp
-  const whatsappMessage = `Olá, Kawan! Meu nome é ${formData.name} e meu e-mail é ${formData.email}. O assunto é: ${formData.subject}. Mensagem: ${formData.message}`;
-
-  // Codifica a mensagem para ser usada na URL
-  const encodedMessage = encodeURIComponent(whatsappMessage);
-
-  const phoneNumber = "5535997496400"; // Substitua pelo seu número
-
-  const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
   const contactInfo = [
     {
@@ -125,26 +142,26 @@ const Contact = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <form className="space-y-6">
+                  <form 
+                    ref={formRef}
+                    onSubmit={handleSubmit} 
+                    className="space-y-6"
+                  >
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <Input
-                          name="name"
+                          name="user_name"
                           placeholder="Seu Nome"
                           required
-                          value={formData.name}
-                          onChange={handleInputChange}
                           className="bg-background/50 border-primary/20 focus:border-primary/50"
                         />
                       </div>
                       <div>
                         <Input
-                          name="email"
+                          name="user_email"
                           type="email"
                           placeholder="Seu Email"
                           required
-                          value={formData.email}
-                          onChange={handleInputChange}
                           className="bg-background/50 border-primary/20 focus:border-primary/50"
                         />
                       </div>
@@ -153,8 +170,7 @@ const Contact = () => {
                     <Input
                       name="subject"
                       placeholder="Assunto"
-                      value={formData.subject}
-                      onChange={handleInputChange}
+                      required
                       className="bg-background/50 border-primary/20 focus:border-primary/50"
                     />
                     
@@ -163,26 +179,17 @@ const Contact = () => {
                       placeholder="Sua mensagem..."
                       rows={6}
                       required
-                      value={formData.message}
-                      onChange={handleInputChange}
                       className="bg-background/50 border-primary/20 focus:border-primary/50 resize-none"
                     />
                     
                     <Button 
-                      type="button" // Alterado para type="button"
+                      type="submit" 
                       size="lg"
                       className="w-full bg-gradient-primary hover:opacity-90 text-white font-medium"
-                      asChild
+                      disabled={isSubmitting}
                     >
-                      <a 
-                        href={whatsappLink} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        onClick={handleWhatsAppClick}
-                      >
-                        <Send className="h-5 w-5 mr-2" />
-                        Enviar Mensagem (WhatsApp)
-                      </a>
+                      <Send className="h-5 w-5 mr-2" />
+                      {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
                     </Button>
                   </form>
                 </CardContent>
