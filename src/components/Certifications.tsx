@@ -24,13 +24,23 @@ const Certifications = () => {
 
   const certifications = [
     {
+      title: "Oracle Cloud Infrastructure 2025 Developer Professional",
+      issuer: "Oracle Cloud",
+      date: "2025",
+      level: "Professional",
+      description: "Certificação avançada para desenvolvedores que demonstra habilidades em desenvolvimento, implantação e gerenciamento de aplicações na Oracle Cloud.",
+      logo: oracleCloudLogo,
+      color: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
+      link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=4B3A77AFD619ACBA2403771CA37DF43591E97C44D20C55B8F84526784E815174",
+    },
+    {
       title: "Oracle Cloud Infrastructure 2025 Certified Architect Associate",
       issuer: "Oracle Cloud",
       date: "2025",
       level: "Associate",
       description: "Certificação avançada em arquitetura de soluções de nuvem da Oracle, cobrindo design de arquitetura em nuvem complexos e otimização de custos.",
       logo: oracleCloudLogo,
-      color: "bg-orange-500/10 text-orange-500 border-orange-500/20",
+      color: "bg-white/10 text-white-500 border-white-500/20",
       link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=4EA02DCF1CC47FA3B393963C02BD5B7D06D6424403858E05A925B5DB57DA7894",
     },
     {
@@ -40,7 +50,7 @@ const Certifications = () => {
       level: "Foundation",
       description: "Conhecimentos fundamentais em serviços cloud da Oracle.",
       logo: oracleCloudLogo,
-      color: "bg-sky-500/10 text-sky-500 border-sky-500/20",
+      color: "bg-orange-500/10 text-orange-500 border-orange-500/20",
       link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=560AB4D57AF389893841564B704A0EDA2BDF31ED3AC82E65468A79D5E929968D",
     },
     {
@@ -50,7 +60,7 @@ const Certifications = () => {
       level: "Foundation",
       description: "Conhecimentos fundamentais em serviços cloud da Oracle.",
       logo: oracleCloudLogo,
-      color: "bg-sky-500/10 text-sky-500 border-sky-500/20",
+      color: "bg-orange-500/10 text-orange-500 border-orange-500/20",
       link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=792EC926D0D49D60EBDCC15C7944097C535BB78965DB5779C3D5B1C05C90B9B5",
     },
     {
