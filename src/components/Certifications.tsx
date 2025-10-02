@@ -24,7 +24,7 @@ const Certifications = () => {
 
   const certifications = [
     {
-      title: "Oracle Cloud Infrastructure Migration Architect Professional",
+      title: "Oracle Cloud Infrastructure 2025 Migration Architect Professional",
       issuer: "Oracle Cloud",
       date: "2025",
       level: "Professional",
