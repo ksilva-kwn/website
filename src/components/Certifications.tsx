@@ -24,6 +24,16 @@ const Certifications = () => {
 
   const certifications = [
     {
+      title: "Oracle Cloud Infrastructure Migration Architect Professional",
+      issuer: "Oracle Cloud",
+      date: "2025",
+      level: "Professional",
+      description: "Certificação avançada para arquitetos de migração que demonstra habilidades em planejar, projetar e gerenciar migrações complexas para a Oracle Cloud.",
+      logo: oracleCloudLogo,
+      color: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
+      link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=044D89EF92227DA06D434541413CFD60B661C06C91FD919B6D82A6E48670B853",
+    },
+    {
       title: "Oracle Cloud Infrastructure 2025 Developer Professional",
       issuer: "Oracle Cloud",
       date: "2025",
