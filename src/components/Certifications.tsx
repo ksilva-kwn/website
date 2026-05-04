@@ -13,9 +13,8 @@ import { useRef } from "react";
 import React from 'react';
 import { Button } from "@/components/ui/button";
 
-// Caminhos corrigidos para as imagens na pasta 'public'
-const oracleCloudLogo = "/OCI.png";
-const microsoftLogo = "/Microsoft.png";
+const oracleCloudLogo = `${import.meta.env.BASE_URL}OCI.png`;
+const microsoftLogo = `${import.meta.env.BASE_URL}Microsoft.png`;
 
 const Certifications = () => {
   const plugin = useRef(
