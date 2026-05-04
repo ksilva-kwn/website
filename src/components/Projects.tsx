@@ -8,8 +8,8 @@ const projects = [
     name: "NFSNinja",
     url: "https://nfsninja.com.br/",
     description:
-      "Plataforma de gestão e automação de compartilhamentos NFS em ambientes corporativos. Simplifica o provisionamento, controle de permissões e monitoramento de volumes de rede, reduzindo o tempo operacional para equipes de infraestrutura.",
-    tags: ["NFS", "Infraestrutura", "Automação", "DevOps"],
+      "SaaS de gerenciamento centralizado de compartilhamentos NFS. Oferece uma interface web para visualizar, organizar e administrar volumes de rede em ambientes corporativos, sem a necessidade de acesso direto ao servidor.",
+    tags: ["NFS", "SaaS", "Infraestrutura", "DevOps"],
     accent: "from-sky-500/20 to-blue-600/20",
     border: "border-sky-500/30",
   },
