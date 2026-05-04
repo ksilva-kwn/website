@@ -1,6 +1,6 @@
 import { Cloud, Container, Terminal, Monitor, Server, Wrench } from "lucide-react";
 
-const BASE = "https://cdn.simpleicons.org";
+const DI = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
 
 const skillGroups = [
   {
@@ -9,9 +9,9 @@ const skillGroups = [
     color: "text-sky-400",
     bg: "bg-sky-500/10 border-sky-500/20",
     skills: [
-      { name: "Azure",        logo: `${BASE}/microsoftazure/60a5ea` },
-      { name: "Oracle Cloud", logo: `${BASE}/oracle/f80000` },
-      { name: "AWS",          logo: `${BASE}/amazonaws/ff9900` },
+      { name: "Azure",        logo: `${DI}/azure/azure-original.svg` },
+      { name: "Oracle Cloud", logo: `${DI}/oracle/oracle-original.svg` },
+      { name: "AWS",          logo: `${DI}/amazonwebservices/amazonwebservices-plain-wordmark.svg` },
     ],
   },
   {
@@ -20,9 +20,9 @@ const skillGroups = [
     color: "text-blue-400",
     bg: "bg-blue-500/10 border-blue-500/20",
     skills: [
-      { name: "Docker",     logo: `${BASE}/docker/2496ed` },
-      { name: "Kubernetes", logo: `${BASE}/kubernetes/326ce5` },
-      { name: "Helm",       logo: `${BASE}/helm/0f1689` },
+      { name: "Docker",     logo: `${DI}/docker/docker-original.svg` },
+      { name: "Kubernetes", logo: `${DI}/kubernetes/kubernetes-original.svg` },
+      { name: "Helm",       logo: `${DI}/helm/helm-original.svg` },
     ],
   },
   {
@@ -31,9 +31,9 @@ const skillGroups = [
     color: "text-purple-400",
     bg: "bg-purple-500/10 border-purple-500/20",
     skills: [
-      { name: "Terraform",      logo: `${BASE}/terraform/7b42bc` },
-      { name: "Ansible",        logo: `${BASE}/ansible/ee0000` },
-      { name: "GitHub Actions", logo: `${BASE}/githubactions/2088ff` },
+      { name: "Terraform",      logo: `${DI}/terraform/terraform-original.svg` },
+      { name: "Ansible",        logo: `${DI}/ansible/ansible-original.svg` },
+      { name: "GitHub Actions", logo: `${DI}/githubactions/githubactions-original.svg` },
     ],
   },
   {
@@ -42,9 +42,9 @@ const skillGroups = [
     color: "text-green-400",
     bg: "bg-green-500/10 border-green-500/20",
     skills: [
-      { name: "Zabbix",     logo: `${BASE}/zabbix/d40000` },
-      { name: "Grafana",    logo: `${BASE}/grafana/f46800` },
-      { name: "Prometheus", logo: `${BASE}/prometheus/e6522c` },
+      { name: "Grafana",    logo: `${DI}/grafana/grafana-original.svg` },
+      { name: "Prometheus", logo: `${DI}/prometheus/prometheus-original.svg` },
+      { name: "Zabbix",     logo: "https://cdn.simpleicons.org/zabbix/d40000" },
     ],
   },
   {
@@ -53,8 +53,8 @@ const skillGroups = [
     color: "text-orange-400",
     bg: "bg-orange-500/10 border-orange-500/20",
     skills: [
-      { name: "Linux",          logo: `${BASE}/linux/ffffff` },
-      { name: "Windows Server", logo: `${BASE}/windows/00adef` },
+      { name: "Linux",          logo: `${DI}/linux/linux-original.svg` },
+      { name: "Windows Server", logo: `${DI}/windows11/windows11-original.svg` },
     ],
   },
   {
@@ -63,9 +63,9 @@ const skillGroups = [
     color: "text-cyan-400",
     bg: "bg-cyan-500/10 border-cyan-500/20",
     skills: [
-      { name: "Bash",       logo: `${BASE}/gnubash/4eaa25` },
-      { name: "PowerShell", logo: `${BASE}/powershell/5391fe` },
-      { name: "Python",     logo: `${BASE}/python/3776ab` },
+      { name: "Bash",       logo: `${DI}/bash/bash-original.svg` },
+      { name: "PowerShell", logo: `${DI}/powershell/powershell-original.svg` },
+      { name: "Python",     logo: `${DI}/python/python-original.svg` },
     ],
   },
 ];
