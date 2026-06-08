@@ -2,12 +2,14 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin } from "lucide-react";
 
+const BASE = import.meta.env.BASE_URL;
+
 const Experience = () => {
   const experiences = [
     {
       title: "Cloud Architect",
       company: "KXC Tecnologia",
-      logo: "/kxc.png",
+      logo: `${BASE}kxc.png`,
       location: "Rio de Janeiro, Brasil (Remote)",
       period: "Jun 2026 - Current",
       description: "Working as a Cloud Architect at KXC Tecnologia, focusing on the design, implementation, and maintenance of highly scalable, secure, and optimized multi-cloud ecosystems. My main mission is to align infrastructure best practices, DevOps culture, and financial governance (FinOps) to drive business results.\n\nKey Responsibilities and Impact:\n\nMulti-Cloud Architecture: Planning and building resilient, high-availability solutions, orchestrating complex environments with a strong focus on AWS, Oracle Cloud Infrastructure (OCI) and Microsoft Azure.\n\nAutomation & DevOps Culture: Implementing Infrastructure as Code (IaC) using Terraform and creating robust CI/CD pipelines with GitHub Actions and Azure DevOps, reducing lead time and minimizing manual interventions.\n\nGovernance & FinOps: Cost management, continuous monitoring of cloud consumption, and application of resource optimization strategies to ensure maximum operational ROI.\n\nInfrastructure Modernization: Managing modern workloads focused on containerization and orchestration (Kubernetes and Docker), as well as integrating virtualization technologies across different cloud providers.",
@@ -17,7 +19,7 @@ const Experience = () => {
     {
       title: "Cloud Specialist",
       company: "Statum Tecnologia",
-      logo: "/logo-statum.svg",
+      logo: `${BASE}logo-statum.svg`,
       location: "Ribeirão Preto, SP (Remote)",
       period: "Out 2024 - Ago 2025",
       description: "At Statum, I provided technical support and cloud infrastructure services for corporate environments, with a strong focus on Linux servers and cloud automation. I specialized in Oracle Cloud Infrastructure (OCI) and Microsoft Azure, managing virtual machines, storage solutions, and network configurations.",
@@ -27,7 +29,7 @@ const Experience = () => {
     {
       title: "Cloud Support Intern",
       company: "Statum Tecnologia",
-      logo: "/logo-statum.svg",
+      logo: `${BASE}logo-statum.svg`,
       location: "Ribeirão Preto, SP (Remote)",
       period: "Jan 2024 - Set 2024",
       description: "During my internship, I provided technical support for cloud environments, with a focus on Oracle Cloud Infrastructure (OCI) and Microsoft Azure. My responsibilities included incident handling and follow-up, as well as proactive monitoring using Zabbix to ensure stability and operational efficiency.",
