@@ -99,7 +99,6 @@ const Experience = () => {
                             className="h-6 w-auto object-contain"
                           />
                         )}
-                        <span>{exp.company}</span>
                       </div>
                       
                       <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-muted-foreground">
