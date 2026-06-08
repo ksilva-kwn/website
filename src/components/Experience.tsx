@@ -80,24 +80,21 @@ const Experience = () => {
                 <Card className="ml-8 md:ml-0 hover-lift bg-card/50 backdrop-blur-sm border-primary/10">
                   <CardHeader className="pb-4">
                     <div className="flex flex-col space-y-2">
+                      {exp.logo && (
+                        <img
+                          src={exp.logo}
+                          alt={`${exp.company} logo`}
+                          className="h-7 w-auto object-contain object-left"
+                        />
+                      )}
                       <div className="flex items-start justify-between">
-                        <h3 className="text-xl font-semibold text-foreground">
+                        <h3 className="text-base font-semibold text-foreground">
                           {exp.title}
                         </h3>
                         {exp.current && (
                           <Badge className="bg-gradient-primary text-white border-0">
                             Atual
                           </Badge>
-                        )}
-                      </div>
-
-                      <div className="flex items-center gap-3 text-primary font-medium">
-                        {exp.logo && (
-                          <img
-                            src={exp.logo}
-                            alt={`${exp.company} logo`}
-                            className="h-6 w-auto object-contain"
-                          />
                         )}
                       </div>
                       
