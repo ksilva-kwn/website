@@ -1,30 +1,33 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Building2, Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin } from "lucide-react";
 
 const Experience = () => {
   const experiences = [
     {
-      title: "Solutions Architect",
-      company: "Statum Tecnologia",
-      location: "Ribeirão Preto, SP (Remote)",
-      period: "Set 2025 - Current",
-      description: "In my current role as a Solutions Architect at Statum, I design and implement cloud solutions tailored to meet client needs. I collaborate closely with development and operations teams to ensure seamless integration and deployment of applications in cloud environments.",
-      technologies: ["Azure", "OCI", "Docker", "Kubernetes", "Terraform", "Monitoring", "Zabbix", "Bash", "PowerShell", "GLPI", "Linux", "Windows Server", "Shell Script"],
+      title: "Cloud Architect",
+      company: "KXC Tecnologia",
+      logo: "/kxc.png",
+      location: "Rio de Janeiro, Brasil (Remote)",
+      period: "Jun 2026 - Current",
+      description: "Working as a Cloud Architect at KXC Tecnologia, focusing on the design, implementation, and maintenance of highly scalable, secure, and optimized multi-cloud ecosystems. My main mission is to align infrastructure best practices, DevOps culture, and financial governance (FinOps) to drive business results.\n\nKey Responsibilities and Impact:\n\nMulti-Cloud Architecture: Planning and building resilient, high-availability solutions, orchestrating complex environments with a strong focus on AWS, Oracle Cloud Infrastructure (OCI) and Microsoft Azure.\n\nAutomation & DevOps Culture: Implementing Infrastructure as Code (IaC) using Terraform and creating robust CI/CD pipelines with GitHub Actions and Azure DevOps, reducing lead time and minimizing manual interventions.\n\nGovernance & FinOps: Cost management, continuous monitoring of cloud consumption, and application of resource optimization strategies to ensure maximum operational ROI.\n\nInfrastructure Modernization: Managing modern workloads focused on containerization and orchestration (Kubernetes and Docker), as well as integrating virtualization technologies across different cloud providers.",
+      technologies: ["AWS", "Azure", "OCI", "Kubernetes", "Docker", "Terraform", "GitHub Actions", "Azure DevOps", "FinOps", "Linux"],
       current: true,
     },
     {
       title: "Cloud Specialist",
       company: "Statum Tecnologia",
+      logo: "/logo-statum.svg",
       location: "Ribeirão Preto, SP (Remote)",
       period: "Out 2024 - Ago 2025",
-      description: "At Statum, I provide technical support and cloud infrastructure services for corporate environments, with a strong focus on Linux servers and cloud automation. I specialize in Oracle Cloud Infrastructure (OCI) and Microsoft Azure, managing virtual machines, storage solutions, and network configurations.",
+      description: "At Statum, I provided technical support and cloud infrastructure services for corporate environments, with a strong focus on Linux servers and cloud automation. I specialized in Oracle Cloud Infrastructure (OCI) and Microsoft Azure, managing virtual machines, storage solutions, and network configurations.",
       technologies: ["Azure", "OCI", "Docker", "Terraform", "Monitoring", "Zabbix", "Bash", "PowerShell", "GLPI", "Linux", "Windows Server", "Shell Script"],
       current: false,
     },
     {
       title: "Cloud Support Intern",
       company: "Statum Tecnologia",
+      logo: "/logo-statum.svg",
       location: "Ribeirão Preto, SP (Remote)",
       period: "Jan 2024 - Set 2024",
       description: "During my internship, I provided technical support for cloud environments, with a focus on Oracle Cloud Infrastructure (OCI) and Microsoft Azure. My responsibilities included incident handling and follow-up, as well as proactive monitoring using Zabbix to ensure stability and operational efficiency.",
@@ -85,10 +88,16 @@ const Experience = () => {
                           </Badge>
                         )}
                       </div>
-                      
-                      <div className="flex items-center text-primary font-medium">
-                        <Building2 className="h-4 w-4 mr-2" />
-                        {exp.company}
+
+                      <div className="flex items-center gap-3 text-primary font-medium">
+                        {exp.logo && (
+                          <img
+                            src={exp.logo}
+                            alt={`${exp.company} logo`}
+                            className="h-6 w-auto object-contain"
+                          />
+                        )}
+                        <span>{exp.company}</span>
                       </div>
                       
                       <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-muted-foreground">
@@ -105,7 +114,7 @@ const Experience = () => {
                   </CardHeader>
                   
                   <CardContent>
-                    <p className="text-muted-foreground mb-4 leading-relaxed">
+                    <p className="text-muted-foreground mb-4 leading-relaxed whitespace-pre-line">
                       {exp.description}
                     </p>
                     

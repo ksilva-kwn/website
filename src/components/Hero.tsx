@@ -74,7 +74,7 @@ const Hero = () => {
               </span>
             </h1>
             <h2 className="text-2xl md:text-3xl lg:text-4xl text-foreground/80 font-light">
-              Solutions Architect | DevOps Enthusiast
+              Cloud Architect | DevOps Enthusiast
             </h2>
           </div>
 
