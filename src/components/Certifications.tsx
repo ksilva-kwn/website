@@ -82,6 +82,27 @@ const Certifications = () => {
       color: "bg-sky-500/10 text-sky-500 border-sky-500/20",
       link: "https://www.credly.com/earner/earned/share/ad151c3d-cc81-45ee-afc3-7b8eda77add9",
     },
+    {
+      title: "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
+      issuer: "Oracle",
+      date: "2025",
+      level: "Foundation",
+      description: "Introduz os fundamentos de Inteligência Artificial e Machine Learning com foco na aplicação prática dessas tecnologias dentro da Oracle Cloud Infrastructure.",
+      logo: oracleCloudLogo,
+      color: "bg-orange-500/10 text-orange-500 border-orange-500/20",
+      link: "",
+      expiration: "Jun 2028",
+    },
+    {
+      title: "Oracle AI Database Certified Foundations Associate",
+      issuer: "Oracle",
+      date: "2025",
+      level: "Foundation",
+      description: "Valida conhecimentos fundamentais do Oracle AI Database 26ai e Oracle Autonomous AI Database, incluindo JSON, Graph, AI Vector Search, Select AI e Oracle APEX.",
+      logo: oracleCloudLogo,
+      color: "bg-orange-500/10 text-orange-500 border-orange-500/20",
+      link: "",
+    },
   ];
 
   return (
