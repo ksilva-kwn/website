@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 
 const oracleCloudLogo = `${import.meta.env.BASE_URL}OCI.png`;
 const microsoftLogo = `${import.meta.env.BASE_URL}Microsoft.png`;
+const awsCloudLogo = `${import.meta.env.BASE_URL}AWS.png`;
 
 const Certifications = () => {
   const plugin = useRef(
@@ -22,6 +23,16 @@ const Certifications = () => {
   );
 
   const certifications = [
+      {
+      title: "AWS Cloud Practitioner - CLF-C02",
+      issuer: "Amazon Web Services",
+      date: "2026",
+      level: "Practitioner",
+      description: "Conhecimentos fundamentais em serviços cloud da Oracle",
+      logo: awsCloudLogo,
+      color: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
+      link: "https://www.credly.com/badges/66b21975-385b-40db-8c27-174f6316c179",
+    },
     {
       title: "Oracle Cloud Infrastructure 2025 Migration Architect Professional",
       issuer: "Oracle Cloud",
