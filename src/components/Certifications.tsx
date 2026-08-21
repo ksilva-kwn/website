@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 
 const oracleCloudLogo = `${import.meta.env.BASE_URL}OCI.png`;
 const microsoftLogo = `${import.meta.env.BASE_URL}Microsoft.png`;
-const awsCloudLogo = `${import.meta.env.BASE_URL}AWS.png`;
+const awsCloudLogo = `${import.meta.env.BASE_URL}AWS.svg`;
 
 const Certifications = () => {
   const plugin = useRef(
