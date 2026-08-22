@@ -23,12 +23,12 @@ const Certifications = () => {
   );
 
   const certifications = [
-      {
+    {
       title: "AWS Cloud Practitioner - CLF-C02",
       issuer: "Amazon Web Services",
       date: "2026",
       level: "Practitioner",
-      description: "Conhecimentos fundamentais em serviços cloud da Oracle",
+      description: "Conhecimentos fundamentais em serviços de nuvem da Amazon Web Services (AWS), segurança, arquitetura e modelos de faturamento.",
       logo: awsCloudLogo,
       color: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
       link: "https://www.credly.com/badges/66b21975-385b-40db-8c27-174f6316c179",
@@ -153,7 +153,11 @@ const Certifications = () => {
                         {/* Header */}
                         <div className="flex items-start justify-between mb-4">
                           <div className="h-10 w-10 overflow-hidden flex items-center justify-center">
-                            <img src={cert.logo} alt={`${cert.issuer} logo`} className="h-full w-auto" />
+                            <img 
+                              src={cert.logo} 
+                              alt={`${cert.issuer} logo`} 
+                              className="h-full w-full object-contain" 
+                            />
                           </div>
                           <Badge className={`${cert.color} border transition-all group-hover:scale-105`}>
                             {cert.level}
