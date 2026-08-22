@@ -13,10 +13,9 @@ import { useRef } from "react";
 import React from 'react';
 import { Button } from "@/components/ui/button";
 
-// Restaurando o BASE_URL para não quebrar o caminho das imagens
 const oracleCloudLogo = `${import.meta.env.BASE_URL}OCI.png`;
 const microsoftLogo = `${import.meta.env.BASE_URL}Microsoft.png`;
-const awsCloudLogo = `${import.meta.env.BASE_URL}AWS.svg`;
+const awsCloudLogo = `${import.meta.env.BASE_URL}AWS.png`;
 
 const Certifications = () => {
   const plugin = useRef(
@@ -153,11 +152,11 @@ const Certifications = () => {
                       <CardContent className="p-6 h-full flex flex-col">
                         {/* Header */}
                         <div className="flex items-start justify-between mb-4">
-                          <div className="h-12 max-w-[100px] flex items-center justify-start">
+                          <div className="h-10 max-w-[120px] flex items-center justify-start shrink-0">
                             <img 
                               src={cert.logo} 
                               alt={`${cert.issuer} logo`} 
-                              className="max-h-full w-auto object-contain" 
+                              className="h-full w-auto object-contain" 
                             />
                           </div>
                           <Badge className={`${cert.color} border transition-all group-hover:scale-105 shrink-0 ml-2`}>
