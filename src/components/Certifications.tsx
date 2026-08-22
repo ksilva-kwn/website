@@ -13,9 +13,10 @@ import { useRef } from "react";
 import React from 'react';
 import { Button } from "@/components/ui/button";
 
-const oracleCloudLogo = `${import.meta.env.BASE_URL}OCI.png`;
-const microsoftLogo = `${import.meta.env.BASE_URL}Microsoft.png`;
-const awsCloudLogo = `${import.meta.env.BASE_URL}AWS.svg`;
+// Acessando os arquivos diretamente da pasta public
+const oracleCloudLogo = "/OCI.png";
+const microsoftLogo = "/Microsoft.png";
+const awsCloudLogo = "/AWS.svg";
 
 const Certifications = () => {
   const plugin = useRef(
@@ -152,11 +153,11 @@ const Certifications = () => {
                       <CardContent className="p-6 h-full flex flex-col">
                         {/* Header */}
                         <div className="flex items-start justify-between mb-4">
-                          <div className="h-10 w-10 overflow-hidden flex items-center justify-center">
+                          <div className="h-10 w-auto min-w-[40px] flex items-center justify-center">
                             <img 
                               src={cert.logo} 
                               alt={`${cert.issuer} logo`} 
-                              className="h-full w-full object-contain" 
+                              className="h-full w-auto object-contain" 
                             />
                           </div>
                           <Badge className={`${cert.color} border transition-all group-hover:scale-105`}>
