@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import GlassBackground from "./components/GlassBackground";
+import LiquidGlass from "./components/LiquidGlass";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +17,7 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <GlassBackground />
+        <LiquidGlass />
         <Toaster />
         <Sonner />
         <BrowserRouter basename={import.meta.env.BASE_URL}>

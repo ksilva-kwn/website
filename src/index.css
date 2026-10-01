@@ -61,12 +61,19 @@
       linear-gradient(160deg, hsl(220 70% 97%), hsl(226 55% 90%));
 
     /* Glass */
-    --glass-bg-1: 0 0% 100% / 0.55;
-    --glass-bg-2: 0 0% 100% / 0.3;
-    --glass-bg-hover: 0 0% 100% / 0.7;
-    --glass-border: 0 0% 100% / 0.65;
-    --glass-highlight: 0 0% 100% / 0.9;
-    --glass-shadow: 0 10px 40px -10px hsl(225 60% 30% / 0.18), 0 2px 6px -2px hsl(225 60% 30% / 0.08);
+    --glass-bg-1: 0 0% 100% / 0.4;
+    --glass-bg-2: 0 0% 100% / 0.18;
+    --glass-bg-hover: 0 0% 100% / 0.6;
+    --glass-border: 0 0% 100% / 0.45;
+    --glass-highlight: 0 0% 100% / 0.95;
+    --glass-glow: 0 0% 100% / 0.6;
+    --glass-blur: 8px;
+    --glass-control-blur: 4px;
+    --glass-shadow: 0 10px 40px -10px hsl(225 60% 30% / 0.2), 0 2px 6px -2px hsl(225 60% 30% / 0.1);
+    --glass-inset:
+      inset 1.5px 1.5px 0 -0.5px hsl(var(--glass-highlight)),
+      inset 0 10px 24px -14px hsl(var(--glass-glow)),
+      inset 0 -10px 24px -16px hsl(var(--glass-glow));
 
     /* Shadows */
     --shadow-glow: 0 0 30px hsl(217 91% 50% / 0.2);
@@ -140,11 +147,14 @@
       linear-gradient(160deg, hsl(232 50% 7%), hsl(232 60% 3%));
 
     /* Glass - frosted, with a cool tint so text stays readable over bright ribbons */
-    --glass-bg-1: 225 60% 60% / 0.16;
-    --glass-bg-2: 240 40% 20% / 0.22;
-    --glass-bg-hover: 0 0% 100% / 0.18;
-    --glass-border: 0 0% 100% / 0.16;
-    --glass-highlight: 0 0% 100% / 0.3;
+    --glass-bg-1: 0 0% 100% / 0.08;
+    --glass-bg-2: 230 50% 6% / 0.2;
+    --glass-bg-hover: 0 0% 100% / 0.16;
+    --glass-border: 0 0% 100% / 0.1;
+    --glass-highlight: 0 0% 100% / 0.6;
+    --glass-glow: 0 0% 100% / 0.14;
+    --glass-blur: 8px;
+    --glass-control-blur: 4px;
     --glass-shadow: 0 10px 40px -10px hsl(230 80% 4% / 0.5), 0 2px 6px -2px hsl(230 80% 4% / 0.3);
 
     /* Shadows */
@@ -227,51 +237,76 @@
     color: transparent;
   }
 
-  /* Glass Surface (panels, cards, navbar) */
-  .glass {
+  /*
+   * Liquid Glass: clear, lightly blurred, with a refracting rim.
+   * --lg-filter is set per element by <LiquidGlass /> (Chromium only) and
+   * points at an SVG displacement filter that bends the backdrop near the edges.
+   */
+  .glass,
+  .glass-control {
     position: relative;
-    background: linear-gradient(135deg, hsl(var(--glass-bg-1)), hsl(var(--glass-bg-2)));
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    backdrop-filter: blur(28px) saturate(180%);
+    isolation: isolate;
     border: 1px solid hsl(var(--glass-border));
-    box-shadow:
-      inset 0 1px 0 0 hsl(var(--glass-highlight)),
-      inset 0 -1px 0 0 hsl(0 0% 100% / 0.06),
-      var(--glass-shadow);
+    box-shadow: var(--glass-shadow);
   }
 
-  /* Liquid Glass specular edge - a light rim that catches the "light" */
-  .glass::before {
+  /*
+   * The glass itself lives on ::after, not on the element. An element with
+   * backdrop-filter becomes a "backdrop root", which would stop nested glass
+   * (buttons inside a panel) from seeing the background behind the panel.
+   */
+  .glass::after,
+  .glass-control::after {
     content: "";
     position: absolute;
-    inset: 0;
+    inset: -1px;
+    z-index: -1;
     border-radius: inherit;
-    padding: 1px;
+    box-shadow: var(--glass-inset);
+    pointer-events: none;
+    transition: background 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .glass::after {
+    background: linear-gradient(135deg, hsl(var(--glass-bg-1)), hsl(var(--glass-bg-2)));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(170%) brightness(1.05);
+    backdrop-filter: var(--lg-filter,) blur(var(--glass-blur)) saturate(170%) brightness(1.05);
+  }
+
+  .glass-control {
+    transition: var(--transition-smooth);
+  }
+
+  .glass-control::after {
+    background: hsl(var(--glass-bg-1));
+    -webkit-backdrop-filter: blur(var(--glass-control-blur)) saturate(180%) brightness(1.08);
+    backdrop-filter: var(--lg-filter,) blur(var(--glass-control-blur)) saturate(180%) brightness(1.08);
+  }
+
+  .glass-control:hover::after {
+    background: hsl(var(--glass-bg-hover));
+  }
+
+  /* Specular rim that catches the "light" on the top-left and bottom-right */
+  .glass::before,
+  .glass-control::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1.5px;
     background: linear-gradient(
       135deg,
-      hsl(0 0% 100% / 0.7),
-      hsl(0 0% 100% / 0) 35%,
-      hsl(0 0% 100% / 0) 65%,
-      hsl(0 0% 100% / 0.35)
+      hsl(0 0% 100% / 0.95),
+      hsl(0 0% 100% / 0.15) 25%,
+      hsl(0 0% 100% / 0) 50%,
+      hsl(0 0% 100% / 0.15) 75%,
+      hsl(0 0% 100% / 0.6)
     );
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
-  }
-
-  /* Smaller glass controls (pills, chips, buttons) */
-  .glass-control {
-    background: hsl(var(--glass-bg-1));
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid hsl(var(--glass-border));
-    box-shadow: inset 0 1px 0 0 hsl(var(--glass-highlight));
-    transition: var(--transition-smooth);
-  }
-
-  .glass-control:hover {
-    background: hsl(var(--glass-bg-hover));
   }
 
   /* Animated Elements */
@@ -290,9 +325,7 @@
 
   .hover-lift:hover {
     transform: translateY(-4px);
-    box-shadow:
-      inset 0 1px 0 0 hsl(var(--glass-highlight)),
-      var(--shadow-intense);
+    box-shadow: var(--shadow-intense);
   }
 }
 

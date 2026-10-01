@@ -75,9 +75,17 @@ vec4 ribbons(float bands, vec2 gdir, float hue, float width) {
 
   vec3 base = iridescent(hue);
   vec3 rim = iridescent(hue + 0.3);
-  vec3 col = base * (0.08 + 0.8 * diff);
-  col += rim * fres * 1.3;
-  col += vec3(1.0) * spec * 1.1;
+  vec3 col;
+  if (uLight > 0.5) {
+    // Light theme: pastel, bright glass with no dark shading (avoids grey smudges)
+    col = mix(base, vec3(1.0), 0.45) * (0.82 + 0.25 * diff);
+    col = mix(col, rim, fres * 0.55);
+    col += vec3(1.0) * spec * 0.6;
+  } else {
+    col = base * (0.08 + 0.8 * diff);
+    col += rim * fres * 1.3;
+    col += vec3(1.0) * spec * 1.1;
+  }
   return vec4(col * mask, mask);
 }
 
@@ -112,19 +120,15 @@ void main() {
   front *= density;
   back *= smoothstep(0.2, 0.55, fbm(uv * 0.8 + vec2(3.1, 7.7) - t * 0.4) + 0.1 * uv.x);
 
-  vec3 dark = vec3(0.012, 0.014, 0.04);
-  vec3 col = dark * (1.0 - back.a) + back.rgb * 0.45;
+  // Light theme sits on soft white paper; dark theme on near-black
+  vec3 ground = uLight > 0.5 ? vec3(0.95, 0.96, 1.0) : vec3(0.012, 0.014, 0.04);
+  float backMix = uLight > 0.5 ? 0.5 : 0.45;
+  vec3 col = ground * (1.0 - back.a * backMix) + back.rgb * backMix;
   col = col * (1.0 - front.a) + front.rgb;
 
   // Soft vignette keeps the edges calm
   float vig = smoothstep(1.7, 0.5, length(uv));
-  col = mix(dark, col, vig);
-
-  if (uLight > 0.5) {
-    float cover = max(front.a, back.a * 0.6) * vig;
-    vec3 paper = vec3(0.93, 0.94, 1.0);
-    col = mix(paper, mix(col, vec3(1.0), 0.25) * 1.15, cover);
-  }
+  col = mix(ground, col, vig);
 
   // Subtle grain avoids banding
   col += (hash(gl_FragCoord.xy + uTime) - 0.5) * 0.015;
