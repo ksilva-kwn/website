@@ -43,8 +43,8 @@ const Experience = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Experiência <span className="bg-gradient-primary bg-clip-text text-transparent">Profissional</span>
+          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">
+            Experiência <span className="text-gradient">Profissional</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Uma jornada através das tecnologias mais modernas e desafiadoras do mercado
@@ -55,7 +55,7 @@ const Experience = () => {
         <div className="max-w-4xl mx-auto">
           <div className="relative">
             {/* Timeline Line */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-primary transform md:-translate-x-1/2" />
+            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-foreground/40 via-foreground/20 to-transparent transform md:-translate-x-1/2" />
 
             {experiences.map((exp, index) => (
               <div 
@@ -66,7 +66,7 @@ const Experience = () => {
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
                 {/* Timeline Dot */}
-                <div className={`absolute top-6 w-4 h-4 bg-primary rounded-full border-4 border-background ${
+                <div className={`absolute top-6 w-4 h-4 bg-gradient-primary rounded-full ring-4 ring-white/40 ${
                   index % 2 === 0 
                     ? 'left-0 md:-left-2' 
                     : 'left-0 md:-right-2'
@@ -77,7 +77,7 @@ const Experience = () => {
                 </div>
 
                 {/* Experience Card */}
-                <Card className="ml-8 md:ml-0 hover-lift bg-card/50 backdrop-blur-sm border-primary/10">
+                <Card className="ml-8 md:ml-0 hover-lift">
                   <CardHeader className="pb-4">
                     <div className="flex flex-col space-y-2">
                       {exp.logo && (
@@ -120,8 +120,8 @@ const Experience = () => {
                       {exp.technologies.map((tech, techIndex) => (
                         <Badge 
                           key={techIndex} 
-                          variant="secondary"
-                          className="bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                          variant="outline"
+                          className="glass-control text-foreground/90 font-medium"
                         >
                           {tech}
                         </Badge>

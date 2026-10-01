@@ -6,7 +6,7 @@ import Certifications from "@/components/Certifications";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Header />
       <Hero />
       <Skills />

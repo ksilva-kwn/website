@@ -118,17 +118,13 @@ const Certifications = () => {
 
   return (
     <section className="py-20 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-tech-purple/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-tech-cyan/10 rounded-full blur-3xl" />
-      
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center mb-4">
-            <Award className="h-8 w-8 text-primary mr-3" />
-            <h2 className="text-3xl md:text-4xl font-bold">
-              <span className="bg-gradient-primary bg-clip-text text-transparent">Certificações</span>
+            <Award className="h-9 w-9 text-primary mr-3" />
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">
+              <span className="text-gradient">Certificações</span>
             </h2>
           </div>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -148,7 +144,7 @@ const Certifications = () => {
               {certifications.map((cert, index) => (
                 <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
                   <div className="h-full">
-                    <Card className="h-full hover-lift bg-card/50 backdrop-blur-sm border-primary/10 group transition-all duration-500 hover:border-primary/30">
+                    <Card className="h-full hover-lift group">
                       <CardContent className="p-6 h-full flex flex-col">
                         {/* Header */}
                         <div className="flex items-start justify-between mb-4">
@@ -178,7 +174,7 @@ const Certifications = () => {
                         </div>
 
                         {/* Footer */}
-                        <div className="flex items-center justify-between pt-4 border-t border-primary/10">
+                        <div className="flex items-center justify-between pt-4 border-t border-foreground/10">
                           <div className="flex items-center text-sm text-muted-foreground">
                             <Calendar className="h-4 w-4 mr-1" />
                             {cert.date}
@@ -198,8 +194,8 @@ const Certifications = () => {
               ))}
             </CarouselContent>
             <div className="hidden md:block">
-              <CarouselPrevious className="border-primary/20 hover:border-primary/50 hover:bg-primary/10" />
-              <CarouselNext className="border-primary/20 hover:border-primary/50 hover:bg-primary/10" />
+              <CarouselPrevious className="h-10 w-10" />
+              <CarouselNext className="h-10 w-10" />
             </div>
           </Carousel>
         </div>
@@ -212,10 +208,10 @@ const Certifications = () => {
           ].map((stat, index) => (
             <div 
               key={index} 
-              className="text-center p-6 rounded-lg glass hover-lift animate-fade-in-up"
+              className="text-center p-6 rounded-3xl glass hover-lift animate-fade-in-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="text-2xl md:text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">
+              <div className="text-3xl md:text-4xl font-semibold tracking-tight text-gradient mb-2">
                 {stat.value}
               </div>
               <div className="text-sm text-muted-foreground">

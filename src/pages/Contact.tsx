@@ -51,15 +51,15 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Header />
-      
-      <main className="pt-24 pb-16">
+
+      <main className="pt-32 pb-16">
         <div className="container mx-auto px-4">
           {/* Hero Section */}
           <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Vamos Trabalhar <span className="bg-gradient-primary bg-clip-text text-transparent">Juntos</span>
+            <h1 className="text-5xl md:text-6xl font-semibold tracking-tighter mb-6">
+              Vamos Trabalhar <span className="text-gradient">Juntos</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Interessado em uma parceria? Tem um projeto em mente? 
@@ -72,7 +72,7 @@ const Contact = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Contact Information */}
               <div className="space-y-4">
-                <Card className="bg-card/50 backdrop-blur-sm border-primary/10">
+                <Card className="h-full">
                   <CardHeader>
                     <CardTitle className="text-xl">Contatos</CardTitle>
                   </CardHeader>
@@ -80,7 +80,7 @@ const Contact = () => {
                     {contactInfo.map((item, index) => (
                       <div key={index}>
                         <div className="flex items-start">
-                          <div className="p-3 bg-primary/10 rounded-lg mr-4 group-hover:bg-primary/20 transition-colors">
+                          <div className="p-3 glass-control rounded-2xl mr-4">
                             <item.icon className="h-6 w-6 text-primary" />
                           </div>
                           <div className="flex-1">
@@ -103,7 +103,7 @@ const Contact = () => {
 
               {/* Social Links */}
               <div className="space-y-4">
-                <Card className="bg-card/50 backdrop-blur-sm border-primary/10">
+                <Card className="h-full">
                   <CardHeader>
                     <CardTitle className="text-xl">Redes Sociais</CardTitle>
                   </CardHeader>
@@ -115,7 +115,7 @@ const Contact = () => {
                           href={social.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center p-4 rounded-lg border border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all hover-lift group"
+                          className="flex items-center p-4 rounded-2xl glass-control hover-lift group"
                         >
                           <social.icon className="h-5 w-5 text-primary mr-4" />
                           <div>
@@ -136,7 +136,7 @@ const Contact = () => {
 
             {/* Bottom Section: Interactive Map */}
             <div className="space-y-8">
-              <Card className="bg-card/50 backdrop-blur-sm border-primary/10 overflow-hidden">
+              <Card className="overflow-hidden">
                 <CardHeader>
                   <CardTitle className="text-xl flex items-center">
                     <MapPin className="h-6 w-6 mr-3 text-primary" />

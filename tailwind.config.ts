@@ -13,6 +13,18 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"SF Pro Display"',
+          '"SF Pro Text"',
+          "Inter",
+          '"Helvetica Neue"',
+          "Arial",
+          "sans-serif",
+        ],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -50,6 +62,7 @@ export default {
         "tech-blue": "hsl(var(--tech-blue))",
         "tech-purple": "hsl(var(--tech-purple))",
         "tech-cyan": "hsl(var(--tech-cyan))",
+        "tech-lilac": "hsl(var(--tech-lilac))",
         "tech-dark": "hsl(var(--tech-dark))",
         "tech-gray": "hsl(var(--tech-gray))",
         sidebar: {
@@ -121,6 +134,17 @@ export default {
             opacity: "1",
           },
         },
+        drift: {
+          "0%, 100%": {
+            transform: "translate(0, 0) scale(1)",
+          },
+          "33%": {
+            transform: "translate(6vw, -4vh) scale(1.08)",
+          },
+          "66%": {
+            transform: "translate(-4vw, 5vh) scale(0.95)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -129,6 +153,7 @@ export default {
         glow: "glow 2s ease-in-out infinite alternate",
         "slide-in-left": "slide-in-left 0.5s ease-out",
         "fade-in-up": "fade-in-up 0.6s ease-out",
+        drift: "drift 24s ease-in-out infinite",
       },
     },
   },

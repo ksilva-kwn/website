@@ -73,16 +73,10 @@ const skillGroups = [
 const Skills = () => {
   return (
     <section id="skills" className="py-20 relative">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-tech-blue/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-tech-purple/10 rounded-full blur-3xl" />
-
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Skills &{" "}
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              Tecnologias
-            </span>
+          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">
+            Skills & <span className="text-gradient">Tecnologias</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Ferramentas e tecnologias que uso no dia a dia para construir e operar infraestruturas modernas
@@ -95,7 +89,7 @@ const Skills = () => {
             return (
               <div
                 key={index}
-                className="p-6 rounded-xl glass hover-lift border border-primary/10 hover:border-primary/30 transition-all duration-300 animate-fade-in-up"
+                className="p-6 rounded-3xl glass hover-lift animate-fade-in-up"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="flex items-center gap-3 mb-5">
@@ -108,7 +102,7 @@ const Skills = () => {
                 <div className="flex flex-wrap gap-4">
                   {group.skills.map((skill, i) => (
                     <div key={i} className="flex flex-col items-center gap-1.5 group/skill">
-                      <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/5 border border-primary/10 group-hover/skill:border-primary/30 group-hover/skill:bg-primary/10 transition-all duration-200 p-2">
+                      <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/90 shadow-md ring-1 ring-white/60 group-hover/skill:scale-110 transition-transform duration-300 p-2.5">
                         <img
                           src={skill.logo}
                           alt={skill.name}

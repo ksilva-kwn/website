@@ -1,9 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ArrowDown, Github, Linkedin, Mail, ArrowUp } from "lucide-react"; // Adicionado ArrowUp
+import { ArrowDown, Github, Linkedin, Mail, ArrowUp } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroBackground from "@/assets/hero-tech-bg.jpg";
-import { useState, useEffect } from "react"; // Adicionado useState e useEffect
+import { useState, useEffect } from "react";
 
 const Hero = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -12,18 +11,14 @@ const Hero = () => {
     const element = document.getElementById("experience");
     element?.scrollIntoView({ behavior: "smooth" });
   };
-  
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 200) {
-        setShowScrollButton(true);
-      } else {
-        setShowScrollButton(false);
-      }
+      setShowScrollButton(window.scrollY > 200);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -32,119 +27,113 @@ const Hero = () => {
     };
   }, []);
 
+  const socials = [
+    { href: "https://github.com/ksilva-kwn", icon: Github, label: "GitHub", external: true },
+    { href: "https://linkedin.com/in/kawansilva29", icon: Linkedin, label: "LinkedIn", external: true },
+    { href: "mailto:kwnsilva@hotmail.com", icon: Mail, label: "Email", external: false },
+  ];
+
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background Effects */}
-      <div 
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `url(${heroBackground})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-dark opacity-80" />
-      <div className="absolute top-20 left-10 w-72 h-72 bg-tech-blue/20 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-tech-purple/20 rounded-full blur-3xl animate-float" style={{ animationDelay: "1s" }} />
-      <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-tech-cyan/20 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s", transform: 'translate(-50%, -50%)' }} />
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Greeting */}
-          <div className="mb-6 animate-fade-in-up">
-            <span className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-medium">
-              👋 Olá, eu sou
-            </span>
-          </div>
-
-          {/* Profile Photo */}
-          <div className="mb-8 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-            <Avatar className="w-44 h-44 mx-auto border-4 border-primary/20 shadow-2xl hover-lift">
-              <AvatarImage src={`${import.meta.env.BASE_URL}kawan.jpg`} alt="Kawan Aureliano da Silva" className="object-cover object-top" />
-              <AvatarFallback className="bg-gradient-primary text-white text-3xl font-bold">
-                KS
-              </AvatarFallback>
-            </Avatar>
-          </div>
-
-          {/* Name and Title */}
-          <div className="mb-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
-              <span className="bg-gradient-primary bg-clip-text text-transparent">
-                Kawan Aureliano da Silva
+    <section className="min-h-screen flex items-center pt-28 pb-16 relative">
+      <div className="container mx-auto px-4">
+        <div className="glass rounded-[2rem] md:rounded-[2.5rem] p-8 md:p-14 max-w-6xl mx-auto animate-fade-in-up">
+          <div className="grid lg:grid-cols-[1.5fr_1fr] gap-10 lg:gap-14 items-center">
+            {/* Text */}
+            <div className="text-center lg:text-left order-2 lg:order-1">
+              <span className="inline-block px-4 py-1.5 glass-control rounded-full text-sm font-medium text-foreground/90">
+                👋 Olá, eu sou
               </span>
-            </h1>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl text-foreground/80 font-light">
-              Cloud Architect | DevOps Enthusiast
-            </h2>
+
+              <h1 className="mt-6 text-5xl md:text-7xl font-semibold tracking-tighter leading-[0.95]">
+                Kawan Aureliano
+                <br />
+                <span className="text-gradient">da Silva</span>
+              </h1>
+
+              <div className="mt-6 flex flex-wrap items-center gap-3 justify-center lg:justify-start">
+                <h2 className="text-xl md:text-2xl font-light text-foreground/90">
+                  Cloud Architect
+                </h2>
+                <span className="glass-control rounded-full px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.15em] text-foreground/90">
+                  DevOps Enthusiast
+                </span>
+              </div>
+
+              <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                Especialista em Cloud Computing, Kubernetes e automação de infraestrutura.
+                Transformando ideias em soluções escaláveis e eficientes.
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                <Button
+                  size="lg"
+                  className="bg-gradient-primary hover:opacity-90 text-white font-medium text-base shadow-lg hover-lift"
+                  onClick={scrollToExperience}
+                >
+                  Ver Experiência
+                  <ArrowDown className="h-5 w-5" />
+                </Button>
+
+                <Button variant="outline" size="lg" asChild className="text-base hover-lift">
+                  <Link to="/contact">
+                    Entre em Contato
+                    <Mail className="h-5 w-5" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+
+            {/* Profile Photo */}
+            <div className="order-1 lg:order-2 flex justify-center">
+              <div className="glass rounded-full p-2.5">
+                <Avatar className="w-44 h-44 md:w-64 md:h-64">
+                  <AvatarImage
+                    src={`${import.meta.env.BASE_URL}kawan.jpg`}
+                    alt="Kawan Aureliano da Silva"
+                    className="object-cover object-top"
+                  />
+                  <AvatarFallback className="bg-gradient-primary text-white text-3xl font-bold">
+                    KS
+                  </AvatarFallback>
+                </Avatar>
+              </div>
+            </div>
           </div>
 
-          {/* Description */}
-          <div className="mb-10 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Especialista em Cloud Computing, Kubernetes e automação de infraestrutura. 
-              Transformando ideias em soluções escaláveis e eficientes.
-            </p>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
-            <Button 
-              size="lg" 
-              className="bg-gradient-primary hover:opacity-90 text-white font-medium px-8 py-4 text-lg hover-lift"
-              onClick={scrollToExperience}
-            >
-              Ver Experiência
-              <ArrowDown className="ml-2 h-5 w-5" />
-            </Button>
-            
-            <Button 
-              variant="outline" 
-              size="lg"
-              asChild
-              className="border-primary/30 hover:border-primary/50 hover:bg-primary/10 px-8 py-4 text-lg hover-lift"
-            >
-              <Link to="/contact">
-                Entre em Contato
-                <Mail className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-          </div>
-
-          {/* Social Links */}
-          <div className="flex justify-center space-x-6 animate-fade-in-up" style={{ animationDelay: "0.8s" }}>
-            <a 
-              href="https://github.com/ksilva-kwn" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="p-3 rounded-full border border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all hover-lift group"
-            >
-              <Github className="h-6 w-6 text-foreground/70 group-hover:text-primary transition-colors" />
-            </a>
-            <a 
-              href="https://linkedin.com/in/kawansilva29" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="p-3 rounded-full border border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all hover-lift group"
-            >
-              <Linkedin className="h-6 w-6 text-foreground/70 group-hover:text-primary transition-colors" />
-            </a>
-            <a 
-              href="mailto:kwnsilva@hotmail.com"
-              className="p-3 rounded-full border border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all hover-lift group"
-            >
-              <Mail className="h-6 w-6 text-foreground/70 group-hover:text-primary transition-colors" />
-            </a>
+          {/* Footer row */}
+          <div className="mt-12 pt-6 border-t border-foreground/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              {socials.map(({ href, icon: Icon, label, external }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="h-11 w-11 flex items-center justify-center rounded-full glass-control hover-lift group"
+                >
+                  <Icon className="h-5 w-5 text-foreground/80 group-hover:text-foreground transition-colors" />
+                </a>
+              ))}
+            </div>
+            <div className="text-center sm:text-right text-xs text-muted-foreground leading-relaxed">
+              <a href="mailto:kwnsilva@hotmail.com" className="hover:text-foreground transition-colors">
+                kwnsilva@hotmail.com
+              </a>
+              <div>© Kawan Silva {new Date().getFullYear()}</div>
+            </div>
           </div>
         </div>
       </div>
-      
+
       {/* Scroll to Top Button */}
       {showScrollButton && (
         <Button
           onClick={scrollToTop}
-          className="fixed bottom-4 right-4 z-50 transition-opacity"
+          className="fixed bottom-5 right-5 z-50 h-11 w-11"
           variant="outline"
           size="icon"
+          aria-label="Voltar ao topo"
         >
           <ArrowUp className="h-4 w-4" />
         </Button>
