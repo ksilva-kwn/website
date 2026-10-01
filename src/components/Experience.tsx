@@ -1,10 +1,45 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import GlassIcon from "@/components/GlassIcon";
+import Reveal from "@/components/effects/Reveal";
+import Tilt from "@/components/effects/Tilt";
+import { useEffect, useRef, useState } from "react";
 
 const BASE = import.meta.env.BASE_URL;
 
+// 0..1: how much of the timeline has scrolled past the middle of the screen
+const useScrollProgress = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const el = ref.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const passed = window.innerHeight * 0.6 - rect.top;
+      setProgress(Math.min(1, Math.max(0, passed / rect.height)));
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  return { ref, progress };
+};
+
 const Experience = () => {
+  const timeline = useScrollProgress();
   const experiences = [
     {
       title: "Cloud Architect",
@@ -53,17 +88,21 @@ const Experience = () => {
 
         {/* Experience Timeline */}
         <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-foreground/40 via-foreground/20 to-transparent transform md:-translate-x-1/2" />
+          <div ref={timeline.ref} className="relative">
+            {/* Timeline track, and the glowing fill that grows as you scroll */}
+            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-white/10 md:-translate-x-1/2" />
+            <div
+              className="absolute left-4 md:left-1/2 top-0 w-[2px] -translate-x-[0.5px] md:-translate-x-1/2 rounded-full bg-gradient-to-b from-sky-300 via-blue-500 to-violet-500 shadow-[0_0_12px_hsl(217_91%_60%/0.8)]"
+              style={{ height: `${timeline.progress * 100}%` }}
+            />
 
             {experiences.map((exp, index) => (
-              <div 
-                key={index} 
+              <Reveal
+                key={index}
+                delay={0.1}
                 className={`relative mb-12 ${
                   index % 2 === 0 ? 'md:ml-auto md:pl-8' : 'md:mr-auto md:pr-8'
-                } md:w-1/2 animate-fade-in-up`}
-                style={{ animationDelay: `${index * 0.2}s` }}
+                } md:w-1/2`}
               >
                 {/* Timeline Dot */}
                 <div className={`absolute top-6 w-4 h-4 bg-gradient-primary rounded-full ring-4 ring-white/40 ${
@@ -77,7 +116,8 @@ const Experience = () => {
                 </div>
 
                 {/* Experience Card */}
-                <Card className="ml-8 md:ml-0 hover-lift">
+                <Tilt max={3} className="ml-8 md:ml-0 rounded-3xl">
+                <Card>
                   <CardHeader className="pb-4">
                     <div className="flex flex-col space-y-2">
                       {exp.logo && (
@@ -129,7 +169,8 @@ const Experience = () => {
                     </div>
                   </CardContent>
                 </Card>
-              </div>
+                </Tilt>
+              </Reveal>
             ))}
           </div>
         </div>

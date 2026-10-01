@@ -144,7 +144,8 @@ const GlassBackground = () => {
     resize();
     window.addEventListener("resize", resize);
     frame = requestAnimationFrame(draw);
-    canvas.style.opacity = "1";
+    // Kept subtle: the globe is the hero's centerpiece and text must stay readable
+    canvas.style.opacity = "0.4";
 
     return () => {
       cancelAnimationFrame(frame);

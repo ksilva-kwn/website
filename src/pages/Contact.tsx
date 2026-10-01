@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import GlassIcon, { type GlassIconName } from "@/components/GlassIcon";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import InteractiveMap from "@/components/InteractiveMap";
 import React from "react";
 
@@ -151,6 +152,7 @@ const Contact = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

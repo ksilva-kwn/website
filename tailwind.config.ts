@@ -134,6 +134,10 @@ export default {
             opacity: "1",
           },
         },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
         drift: {
           "0%, 100%": {
             transform: "translate(0, 0) scale(1)",
@@ -154,6 +158,7 @@ export default {
         "slide-in-left": "slide-in-left 0.5s ease-out",
         "fade-in-up": "fade-in-up 0.6s ease-out",
         drift: "drift 24s ease-in-out infinite",
+        marquee: "marquee 40s linear infinite",
       },
     },
   },

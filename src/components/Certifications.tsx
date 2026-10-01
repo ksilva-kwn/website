@@ -17,12 +17,8 @@ const oracleCloudLogo = `${import.meta.env.BASE_URL}OCI.png`;
 const microsoftLogo = `${import.meta.env.BASE_URL}Microsoft.png`;
 const awsCloudLogo = `${import.meta.env.BASE_URL}AWS.png`;
 
-const Certifications = () => {
-  const plugin = useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true })
-  );
-
-  const certifications = [
+// Exported so the Hero can show the certification count
+export const certifications = [
     {
       title: "AWS Cloud Practitioner - CLF-C02",
       issuer: "Amazon Web Services",
@@ -116,6 +112,11 @@ const Certifications = () => {
     },
   ];
 
+const Certifications = () => {
+  const plugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  );
+
   return (
     <section className="py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
@@ -200,26 +201,6 @@ const Certifications = () => {
           </Carousel>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto">
-          {[
-            { label: "Certificações", value: certifications.length.toString() },
-            { label: "Anos de Experiência", value: "2+" },
-          ].map((stat, index) => (
-            <div 
-              key={index} 
-              className="text-center p-6 rounded-3xl glass hover-lift animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="text-3xl md:text-4xl font-semibold tracking-tight text-gradient mb-2">
-                {stat.value}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
