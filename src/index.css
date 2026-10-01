@@ -345,6 +345,57 @@
   }
 }
 
+/* Glass bubble that follows the mouse (see CursorLens.tsx) */
+.cursor-lens {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: transform;
+  -webkit-backdrop-filter: saturate(1.2) brightness(1.08);
+  backdrop-filter: var(--lens-filter,) saturate(1.2) brightness(1.08);
+  box-shadow:
+    inset 0 0 0 1px hsl(0 0% 100% / 0.2),
+    inset 0 12px 24px -10px hsl(0 0% 100% / 0.35),
+    inset 0 -14px 28px -12px hsl(220 100% 70% / 0.25),
+    0 16px 40px -12px hsl(0 0% 0% / 0.55);
+}
+
+/* Iridescent rim, like a soap bubble */
+.cursor-lens::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from 210deg,
+    hsl(320 100% 75%),
+    hsl(40 100% 72%),
+    hsl(140 90% 70%),
+    hsl(195 100% 72%),
+    hsl(265 100% 78%),
+    hsl(320 100% 75%)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.85;
+}
+
+/* Specular highlight on the top-left */
+.cursor-lens::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 30% 24%, hsl(0 0% 100% / 0.45), transparent 32%);
+}
+
 /* Mapbox Marker Styles */
 .custom-marker .marker-pulse {
   width: 20px;

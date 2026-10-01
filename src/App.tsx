@@ -9,6 +9,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import GlassBackground from "./components/GlassBackground";
 import LiquidGlass from "./components/LiquidGlass";
+import CursorLens from "./components/CursorLens";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const App = () => (
       <TooltipProvider>
         <GlassBackground />
         <LiquidGlass />
+        <CursorLens />
         <Toaster />
         <Sonner />
         <BrowserRouter basename={import.meta.env.BASE_URL}>
