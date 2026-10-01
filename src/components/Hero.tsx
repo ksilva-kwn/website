@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ArrowDown, Github, Linkedin, Mail, ArrowUp } from "lucide-react";
+import GlassIcon, { type GlassIconName } from "@/components/GlassIcon";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -27,10 +27,10 @@ const Hero = () => {
     };
   }, []);
 
-  const socials = [
-    { href: "https://github.com/ksilva-kwn", icon: Github, label: "GitHub", external: true },
-    { href: "https://linkedin.com/in/kawansilva29", icon: Linkedin, label: "LinkedIn", external: true },
-    { href: "mailto:kwnsilva@hotmail.com", icon: Mail, label: "Email", external: false },
+  const socials: { href: string; icon: GlassIconName; label: string; external: boolean }[] = [
+    { href: "https://github.com/ksilva-kwn", icon: "github", label: "GitHub", external: true },
+    { href: "https://linkedin.com/in/kawansilva29", icon: "linkedin", label: "LinkedIn", external: true },
+    { href: "mailto:kwnsilva@hotmail.com", icon: "email", label: "Email", external: false },
   ];
 
   return (
@@ -72,13 +72,13 @@ const Hero = () => {
                   onClick={scrollToExperience}
                 >
                   Ver Experiência
-                  <ArrowDown className="h-5 w-5" />
+                  <GlassIcon name="down" onColor />
                 </Button>
 
                 <Button variant="outline" size="lg" asChild className="text-base hover-lift">
                   <Link to="/contact">
                     Entre em Contato
-                    <Mail className="h-5 w-5" />
+                    <GlassIcon name="email" />
                   </Link>
                 </Button>
               </div>
@@ -104,7 +104,7 @@ const Hero = () => {
           {/* Footer row */}
           <div className="mt-12 pt-6 border-t border-foreground/10 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              {socials.map(({ href, icon: Icon, label, external }) => (
+              {socials.map(({ href, icon, label, external }) => (
                 <a
                   key={label}
                   href={href}
@@ -112,7 +112,7 @@ const Hero = () => {
                   {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="h-11 w-11 flex items-center justify-center rounded-full glass-control hover-lift group"
                 >
-                  <Icon className="h-5 w-5 text-foreground/80 group-hover:text-foreground transition-colors" />
+                  <GlassIcon name={icon} className="h-6 w-6 transition-transform group-hover:scale-110" />
                 </a>
               ))}
             </div>
@@ -121,6 +121,14 @@ const Hero = () => {
                 kwnsilva@hotmail.com
               </a>
               <div>© Kawan Silva {new Date().getFullYear()}</div>
+              <a
+                href="https://icons8.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+              >
+                Ícones por Icons8
+              </a>
             </div>
           </div>
         </div>
@@ -135,7 +143,7 @@ const Hero = () => {
           size="icon"
           aria-label="Voltar ao topo"
         >
-          <ArrowUp className="h-4 w-4" />
+          <GlassIcon name="up" />
         </Button>
       )}
     </section>

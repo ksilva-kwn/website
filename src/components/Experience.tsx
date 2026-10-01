@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, MapPin } from "lucide-react";
+import GlassIcon from "@/components/GlassIcon";
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -100,11 +100,11 @@ const Experience = () => {
                       
                       <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-muted-foreground">
                         <div className="flex items-center">
-                          <Calendar className="h-4 w-4 mr-1" />
+                          <GlassIcon name="calendar" className="h-4 w-4 mr-1.5" />
                           {exp.period}
                         </div>
                         <div className="flex items-center">
-                          <MapPin className="h-4 w-4 mr-1" />
+                          <GlassIcon name="marker" className="h-4 w-4 mr-1.5" />
                           {exp.location}
                         </div>
                       </div>

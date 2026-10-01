@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Cloud, Sun, Moon } from "lucide-react";
+import GlassIcon from "@/components/GlassIcon";
 import { useState } from "react";
 import { useTheme } from "next-themes";
 
@@ -27,7 +27,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 pl-1 group">
             <div className="p-1.5 bg-gradient-primary rounded-full shadow-md group-hover:animate-glow transition-all">
-              <Cloud className="w-5 h-5 text-white" />
+              <GlassIcon name="cloud" onColor />
             </div>
             <span className="text-base font-semibold tracking-tight text-foreground">
               Kawan <span className="font-light italic">Silva</span>
@@ -56,7 +56,7 @@ const Header = () => {
               className="ml-1 h-9 w-9 text-foreground/80"
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              <GlassIcon name={theme === "dark" ? "sun" : "moon"} />
             </Button>
             <Button asChild size="sm" className="ml-1 bg-gradient-primary text-white hover:opacity-90 shadow-md">
               <a href="/CV-Kawan_Silva-EN.pdf" download="CV-Kawan_Silva-EN.pdf">
@@ -74,7 +74,7 @@ const Header = () => {
               className="h-9 w-9 text-foreground/80"
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              <GlassIcon name={theme === "dark" ? "sun" : "moon"} />
             </Button>
             <Button
               variant="ghost"
@@ -83,7 +83,7 @@ const Header = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              <GlassIcon name={isMenuOpen ? "multiply" : "menu"} />
             </Button>
           </div>
         </div>

@@ -1,27 +1,27 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Phone, Github, Linkedin, Clock, MapPin } from "lucide-react";
+import GlassIcon, { type GlassIconName } from "@/components/GlassIcon";
 import Header from "@/components/Header";
 import InteractiveMap from "@/components/InteractiveMap";
 import React from "react";
 
 const Contact = () => {
-  const contactInfo = [
+  const contactInfo: { icon: GlassIconName; title: string; info: string; link: string; description: string }[] = [
     {
-      icon: Mail,
+      icon: "email",
       title: "Email",
       info: "kwnsilva@hotmail.com",
       link: "mailto:kwnsilva@hotmail.com",
       description: "Respondo em até 24h"
     },
     {
-      icon: Phone,
+      icon: "phone",
       title: "Telefone",
       info: "+55 35 99749-6400",
       link: "tel:+5535997496400",
       description: "Segunda à Sexta, 9h-18h"
     },
     {
-      icon: Clock,
+      icon: "clock",
       title: "Horário",
       info: "Seg - Sex: 8h às 18h",
       link: "#",
@@ -29,21 +29,21 @@ const Contact = () => {
     },
   ];
 
-  const socialLinks = [
+  const socialLinks: { icon: GlassIconName; name: string; url: string; username: string }[] = [
     {
-      icon: Github,
+      icon: "github",
       name: "GitHub",
       url: "https://github.com/ksilva-kwn",
       username: "@ksilva-kwn"
     },
     {
-      icon: Linkedin,
+      icon: "linkedin",
       name: "LinkedIn",
       url: "https://linkedin.com/in/kawansilva29",
       username: "/in/kawansilva29"
     },
     {
-      icon: Mail,
+      icon: "email",
       name: "Email",
       url: "mailto:kwnsilva@hotmail.com",
       username: "kwnsilva@hotmail.com"
@@ -81,7 +81,7 @@ const Contact = () => {
                       <div key={index}>
                         <div className="flex items-start">
                           <div className="p-3 glass-control rounded-2xl mr-4">
-                            <item.icon className="h-6 w-6 text-primary" />
+                            <GlassIcon name={item.icon} className="h-6 w-6" />
                           </div>
                           <div className="flex-1">
                             <h3 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">
@@ -117,7 +117,7 @@ const Contact = () => {
                           rel="noopener noreferrer"
                           className="flex items-center p-4 rounded-2xl glass-control hover-lift group"
                         >
-                          <social.icon className="h-5 w-5 text-primary mr-4" />
+                          <GlassIcon name={social.icon} className="h-6 w-6 mr-4" />
                           <div>
                             <div className="font-medium group-hover:text-primary transition-colors">
                               {social.name}
@@ -139,7 +139,7 @@ const Contact = () => {
               <Card className="overflow-hidden">
                 <CardHeader>
                   <CardTitle className="text-xl flex items-center">
-                    <MapPin className="h-6 w-6 mr-3 text-primary" />
+                    <GlassIcon name="marker" className="h-6 w-6 mr-3" />
                     Localização
                   </CardTitle>
                 </CardHeader>

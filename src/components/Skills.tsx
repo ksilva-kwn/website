@@ -1,12 +1,16 @@
-import { Cloud, Container, Terminal, Monitor, Server, Wrench } from "lucide-react";
+import GlassIcon, { type GlassIconName } from "@/components/GlassIcon";
 
 const DI = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
 
-const skillGroups = [
+const skillGroups: {
+  label: string;
+  icon: GlassIconName;
+  bg: string;
+  skills: { name: string; logo: string }[];
+}[] = [
   {
     label: "Cloud",
-    icon: Cloud,
-    color: "text-sky-400",
+    icon: "cloud",
     bg: "bg-sky-500/10 border-sky-500/20",
     skills: [
       { name: "Azure",        logo: `${DI}/azure/azure-original.svg` },
@@ -16,8 +20,7 @@ const skillGroups = [
   },
   {
     label: "Containers & Orquestração",
-    icon: Container,
-    color: "text-blue-400",
+    icon: "box",
     bg: "bg-blue-500/10 border-blue-500/20",
     skills: [
       { name: "Docker",     logo: `${DI}/docker/docker-original.svg` },
@@ -27,8 +30,7 @@ const skillGroups = [
   },
   {
     label: "IaC & Automação",
-    icon: Wrench,
-    color: "text-purple-400",
+    icon: "support",
     bg: "bg-purple-500/10 border-purple-500/20",
     skills: [
       { name: "Terraform",      logo: `${DI}/terraform/terraform-original.svg` },
@@ -38,8 +40,7 @@ const skillGroups = [
   },
   {
     label: "Monitoramento",
-    icon: Monitor,
-    color: "text-green-400",
+    icon: "monitor",
     bg: "bg-green-500/10 border-green-500/20",
     skills: [
       { name: "Grafana",    logo: `${DI}/grafana/grafana-original.svg` },
@@ -49,8 +50,7 @@ const skillGroups = [
   },
   {
     label: "Sistemas Operacionais",
-    icon: Server,
-    color: "text-orange-400",
+    icon: "server",
     bg: "bg-orange-500/10 border-orange-500/20",
     skills: [
       { name: "Linux",          logo: `${DI}/linux/linux-original.svg` },
@@ -59,8 +59,7 @@ const skillGroups = [
   },
   {
     label: "Scripting & Dev",
-    icon: Terminal,
-    color: "text-cyan-400",
+    icon: "console",
     bg: "bg-cyan-500/10 border-cyan-500/20",
     skills: [
       { name: "Bash",       logo: `${DI}/bash/bash-original.svg` },
@@ -85,7 +84,6 @@ const Skills = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {skillGroups.map((group, index) => {
-            const Icon = group.icon;
             return (
               <div
                 key={index}
@@ -94,7 +92,7 @@ const Skills = () => {
               >
                 <div className="flex items-center gap-3 mb-5">
                   <div className={`p-2 rounded-lg ${group.bg} border`}>
-                    <Icon className={`h-5 w-5 ${group.color}`} />
+                    <GlassIcon name={group.icon} />
                   </div>
                   <h3 className="font-semibold text-foreground">{group.label}</h3>
                 </div>

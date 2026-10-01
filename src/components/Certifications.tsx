@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Award, Calendar, ExternalLink } from "lucide-react";
+import GlassIcon from "@/components/GlassIcon";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
 import React from 'react';
@@ -122,7 +122,7 @@ const Certifications = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center mb-4">
-            <Award className="h-9 w-9 text-primary mr-3" />
+            <GlassIcon name="medal" className="h-10 w-10 mr-3" />
             <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">
               <span className="text-gradient">Certificações</span>
             </h2>
@@ -176,13 +176,13 @@ const Certifications = () => {
                         {/* Footer */}
                         <div className="flex items-center justify-between pt-4 border-t border-foreground/10">
                           <div className="flex items-center text-sm text-muted-foreground">
-                            <Calendar className="h-4 w-4 mr-1" />
+                            <GlassIcon name="calendar" className="h-4 w-4 mr-1.5" />
                             {cert.date}
                           </div>
                           {cert.link && (
                             <Button variant="ghost" size="sm" asChild>
                               <a href={cert.link} target="_blank" rel="noopener noreferrer">
-                                <ExternalLink className="h-4 w-4 text-muted-foreground group-hover/btn:text-primary transition-colors" />
+                                <GlassIcon name="external-link" className="h-4 w-4" />
                               </a>
                             </Button>
                           )}
