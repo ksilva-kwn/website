@@ -1,8 +1,7 @@
 import { useEffect, useRef } from "react";
-import { useTheme } from "next-themes";
 
-// Flowing iridescent "liquid glass" ribbons rendered with WebGL2.
-// Sharp on purpose: the .glass surfaces blur whatever sits behind them.
+// A single flowing, twisting ribbon of iridescent glass on black, rendered with
+// WebGL2. Sharp on purpose: the .glass surfaces blur whatever sits behind them.
 const VERT = `#version 300 es
 in vec2 aPos;
 void main() { gl_Position = vec4(aPos, 0.0, 1.0); }`;
@@ -11,127 +10,70 @@ const FRAG = `#version 300 es
 precision highp float;
 uniform vec2 uRes;
 uniform float uTime;
-uniform float uLight;
 out vec4 outColor;
 
-float hash(vec2 p) {
-  p = fract(p * vec2(123.34, 456.21));
-  p += dot(p, p + 45.32);
-  return fract(p.x * p.y);
+const float TAU = 6.2831853;
+
+// Thin-film interference: the rainbow sheen of soap bubbles and coated glass
+vec3 film(float phase) {
+  return 0.5 + 0.5 * cos(TAU * (phase + vec3(0.0, 0.33, 0.67)));
 }
 
-float noise(vec2 p) {
-  vec2 i = floor(p);
-  vec2 f = fract(p);
-  vec2 u = f * f * (3.0 - 2.0 * f);
-  return mix(
-    mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),
-    mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
-    u.y
-  );
+// Bright rim near the ribbon edge (|v| -> 1), anti-aliased by aa
+float rim(float av, float aa) {
+  return smoothstep(0.7, 1.0, av) * (1.0 - smoothstep(1.0, 1.0 + aa, av));
 }
 
-float fbm(vec2 p) {
-  float v = 0.0;
-  float a = 0.5;
-  mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
-  for (int i = 0; i < 5; i++) {
-    v += a * noise(p);
-    p = m * p;
-    a *= 0.44;
-  }
-  return v;
-}
+// One sheet of the ribbon: center line c, half-width hw. Returns added color.
+vec3 sheet(vec2 uv, float c, float hw, float phase, float strength) {
+  float v = (uv.y - c) / hw;
+  float av = abs(v);
+  float aa = fwidth(v) * 1.5;
+  float inside = 1.0 - smoothstep(1.0, 1.0 + aa, av);
+  if (inside <= 0.0) return vec3(0.0);
 
-// Looping 4-stop gradient: deep blue -> violet -> magenta -> cyan
-vec3 iridescent(float t) {
-  t = fract(t) * 4.0;
-  vec3 c0 = vec3(0.10, 0.25, 0.95);
-  vec3 c1 = vec3(0.50, 0.20, 0.95);
-  vec3 c2 = vec3(0.95, 0.35, 0.80);
-  vec3 c3 = vec3(0.10, 0.85, 1.00);
-  if (t < 1.0) return mix(c0, c1, smoothstep(0.0, 1.0, t));
-  if (t < 2.0) return mix(c1, c2, smoothstep(1.0, 2.0, t));
-  if (t < 3.0) return mix(c2, c3, smoothstep(2.0, 3.0, t));
-  return mix(c3, c0, smoothstep(3.0, 4.0, t));
-}
+  vec3 f = film(phase + v * 0.6);
+  // Slightly different edge per channel = chromatic fringes like real glass
+  vec3 edge = vec3(rim(av * 1.025, aa), rim(av, aa), rim(av * 0.975, aa));
 
-// Shades one layer of ribbons as glossy glass tubes running along the bands.
-// Returns premultiplied color in rgb and coverage in a.
-vec4 ribbons(float bands, vec2 gdir, float hue, float width) {
-  float s = sin(bands);
-  float aa = fwidth(s) * 2.0 + 0.02;
-  float mask = smoothstep(-width, -width + aa, s);
-
-  // Position across the tube: 1 at the center line, 0 at the edges
-  float a = clamp((s + width) / (1.0 + width), 0.0, 1.0);
-  float side = sign(cos(bands));
-  vec3 n = normalize(vec3(gdir * side * sqrt(1.0 - a * a), a));
-
-  vec3 L = normalize(vec3(-0.45, 0.6, 0.65));
-  float diff = max(dot(n, L), 0.0);
-  float spec = pow(max(dot(reflect(-L, n), vec3(0.0, 0.0, 1.0)), 0.0), 36.0);
-  float fres = pow(1.0 - n.z, 2.0);
-
-  vec3 base = iridescent(hue);
-  vec3 rim = iridescent(hue + 0.3);
-  vec3 col;
-  if (uLight > 0.5) {
-    // Light theme: pastel, bright glass with no dark shading (avoids grey smudges)
-    col = mix(base, vec3(1.0), 0.45) * (0.82 + 0.25 * diff);
-    col = mix(col, rim, fres * 0.55);
-    col += vec3(1.0) * spec * 0.6;
-  } else {
-    col = base * (0.08 + 0.8 * diff);
-    col += rim * fres * 1.3;
-    col += vec3(1.0) * spec * 1.1;
-  }
-  return vec4(col * mask, mask);
+  vec3 col = vec3(0.10, 0.28, 1.0) * 0.16 * inside;          // blue glass body
+  col += f * 0.35 * av * av * inside;                         // sheen toward the edges
+  col += edge * mix(vec3(1.0), f, 0.45) * 1.4;                // bright rim
+  // Where the ribbon twists it gets thin and catches a white highlight
+  float fold = 1.0 - smoothstep(0.012, 0.05, hw);
+  col += vec3(0.9, 0.95, 1.0) * fold * (1.0 - av) * 1.6 * inside;
+  return col * strength;
 }
 
 void main() {
   vec2 uv = (gl_FragCoord.xy - 0.5 * uRes) / uRes.y;
-  float t = uTime * 0.035;
-  // Stretch and tilt the field so shapes flow as long diagonal ribbons
-  mat2 rot = mat2(0.82, -0.57, 0.57, 0.82);
-  vec2 p = (rot * uv) * vec2(0.55, 1.5);
+  float t = uTime * 0.12;
+  float x = uv.x;
 
-  // Domain warping gives the fluid, folded shapes
-  vec2 q = vec2(fbm(p + vec2(0.0, t)), fbm(p + vec2(5.2, 1.3) - t));
-  vec2 r = vec2(
-    fbm(p + 2.5 * q + vec2(1.7, 9.2) + 0.6 * t),
-    fbm(p + 2.5 * q + vec2(8.3, 2.8) - 0.4 * t)
-  );
+  // Main ribbon: diagonal S-curve that rises to the right and twists as it flows
+  float c = 0.3 * x + 0.12 * sin(2.2 * x + t * 2.0) + 0.05 * sin(4.7 * x - t * 2.6 + 1.0);
+  float hw = 0.11 * (0.1 + 0.9 * abs(cos(1.8 * x - t * 1.4)));
 
-  vec2 w = 2.2 * r;
-  float e = 2.0 / uRes.y;
-  float f  = fbm(p + w);
-  float fx = fbm(p + w + vec2(e, 0.0));
-  float fy = fbm(p + w + vec2(0.0, e));
-  vec2 gdir = normalize(vec2(fx - f, fy - f) + 1e-6);
+  vec3 col = vec3(0.0);
+  for (int i = 0; i < 4; i++) {
+    float fi = float(i);
+    float ci = c + (fi - 1.5) * 0.014 * sin(3.0 * x + t * 2.0 + fi);
+    float hwi = hw * (1.0 - fi * 0.14);
+    col += sheet(uv, ci, hwi, 2.0 * x + fi * 0.7 + t * 0.8, 0.55);
+  }
 
-  // Two layers: a dimmer one behind, a bright one in front
-  float hue = f * 1.4 + r.y * 0.7 + t * 0.5;
-  vec4 back = ribbons(f * 8.0 + r.x * 4.0 + 1.7, gdir, hue + 0.5, 0.15);
-  vec4 front = ribbons(f * 11.0 + r.x * 2.0, gdir, hue, 0.05);
+  // A thin secondary strand, like the stray wisp in the reference
+  float c2 = 0.42 * x + 0.06 + 0.1 * sin(1.7 * x - t * 1.7 + 2.0);
+  float hw2 = 0.022 * (0.3 + 0.7 * abs(sin(2.3 * x + t * 1.1)));
+  col += sheet(uv, c2, hw2, 1.5 * x + t + 0.4, 0.6);
 
-  // Ribbons gather in flowing clusters, leaving dark negative space
-  float density = smoothstep(0.3, 0.6, fbm(uv * 0.8 + vec2(t * 0.6, -t * 0.4)) + 0.15 * uv.x);
-  front *= density;
-  back *= smoothstep(0.2, 0.55, fbm(uv * 0.8 + vec2(3.1, 7.7) - t * 0.4) + 0.1 * uv.x);
+  // Soft blue bloom around the ribbon
+  float d = abs(uv.y - c) / max(hw, 0.02);
+  col += vec3(0.08, 0.2, 0.9) * 0.12 * exp(-d * 0.6);
 
-  // Light theme sits on soft white paper; dark theme on near-black
-  vec3 ground = uLight > 0.5 ? vec3(0.95, 0.96, 1.0) : vec3(0.012, 0.014, 0.04);
-  float backMix = uLight > 0.5 ? 0.5 : 0.45;
-  vec3 col = ground * (1.0 - back.a * backMix) + back.rgb * backMix;
-  col = col * (1.0 - front.a) + front.rgb;
+  // Fade the ribbon out toward the screen edges
+  col *= smoothstep(1.25, 0.55, length(uv * vec2(0.8, 1.0)));
 
-  // Soft vignette keeps the edges calm
-  float vig = smoothstep(1.7, 0.5, length(uv));
-  col = mix(ground, col, vig);
-
-  // Subtle grain avoids banding
-  col += (hash(gl_FragCoord.xy + uTime) - 0.5) * 0.015;
   outColor = vec4(col, 1.0);
 }`;
 
@@ -148,9 +90,6 @@ const compile = (gl: WebGL2RenderingContext, type: number, src: string) => {
 
 const GlassBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { resolvedTheme } = useTheme();
-  const lightRef = useRef(0);
-  lightRef.current = resolvedTheme === "light" ? 1 : 0;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -176,34 +115,34 @@ const GlassBackground = () => {
 
     const uRes = gl.getUniformLocation(program, "uRes");
     const uTime = gl.getUniformLocation(program, "uTime");
-    const uLight = gl.getUniformLocation(program, "uLight");
 
-    // Render below native resolution: the shapes are smooth, so this keeps it cheap
+    // The shader is cheap, so render near native resolution to keep the thin rims crisp
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const start = performance.now();
+    let frame = 0;
+
     const resize = () => {
-      const scale = Math.min(window.devicePixelRatio || 1, 1.5) * 0.75;
+      const scale = Math.min(window.devicePixelRatio || 1, 1.5);
       canvas.width = Math.round(window.innerWidth * scale);
       canvas.height = Math.round(window.innerHeight * scale);
       gl.viewport(0, 0, canvas.width, canvas.height);
+      // With reduced motion there is no render loop, so redraw the still frame
+      if (reduceMotion) frame = requestAnimationFrame(draw);
     };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const start = performance.now() - 20000;
-    let frame = 0;
 
     const draw = (now: number) => {
       gl.uniform2f(uRes, canvas.width, canvas.height);
-      gl.uniform1f(uTime, reduceMotion ? 20 : (now - start) / 1000);
-      gl.uniform1f(uLight, lightRef.current);
+      gl.uniform1f(uTime, reduceMotion ? 0 : (now - start) / 1000);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
-      if (!document.hidden) frame = requestAnimationFrame(draw);
+      if (!document.hidden && !reduceMotion) frame = requestAnimationFrame(draw);
     };
     const onVisibility = () => {
       cancelAnimationFrame(frame);
       if (!document.hidden) frame = requestAnimationFrame(draw);
     };
     document.addEventListener("visibilitychange", onVisibility);
+    resize();
+    window.addEventListener("resize", resize);
     frame = requestAnimationFrame(draw);
     canvas.style.opacity = "1";
 
@@ -215,8 +154,7 @@ const GlassBackground = () => {
   }, []);
 
   return (
-    <div aria-hidden className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-      <div className="absolute inset-0 bg-mesh" />
+    <div aria-hidden className="fixed inset-0 -z-10 overflow-hidden pointer-events-none bg-black">
       <canvas
         ref={canvasRef}
         className="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-1000"
